@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://yabuki.github.io/BookClub/</loc>
+    <lastmod>2020-07-06T03:32:29+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yabuki.github.io/BookClub/about/</loc>
+    <lastmod>2020-07-06T03:26:11+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yabuki.github.io/BookClub/todo/</loc>
+    <lastmod>2020-07-06T03:32:58+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yabuki.github.io/BookClub/categories/</loc>
+    <lastmod>2020-07-06T03:32:43+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yabuki.github.io/BookClub/tags/fluentpython/</loc>
+    <lastmod>2020-07-06T03:32:43+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yabuki.github.io/BookClub/fluentpython/</loc>
+    <lastmod>2020-07-06T03:32:43+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yabuki.github.io/BookClub/tags/python/</loc>
+    <lastmod>2020-07-06T03:32:43+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yabuki.github.io/BookClub/tags/</loc>
+    <lastmod>2020-07-06T03:32:43+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://yabuki.github.io/BookClub/categories/%E3%81%8A%E7%9F%A5%E3%82%89%E3%81%9B/</loc>
+    <lastmod>2020-07-06T03:32:43+09:00</lastmod>
+  </url>
+  
+</urlset>

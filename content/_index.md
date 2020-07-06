@@ -17,5 +17,5 @@ keywords:
 
 ### FluentPython読書会
 
-- [Fluent Pytghon 読書会](./fluentpython/)
+- [Fluent Pytghon 読書会](/BookClub/fluentpython/)
 

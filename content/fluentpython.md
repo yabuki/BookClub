@@ -54,7 +54,7 @@ Fluent Pythonを何らかの合法的な手段で参照できる人。図書館�
 
 ### 開催日時と開催頻度
 
-- [スケジュール](./fluentpython-schdule/)
+- [スケジュール](/BookClub/fluentpython-schdule/)
 
 ## 付録
 

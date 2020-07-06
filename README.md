@@ -31,3 +31,7 @@
     - 作成したファイルの上部にある draft: true をfalseに変えて、fileをsaveして、コミットしておきましょう。
     - リポジトリの直下に移動して、hugoコマンドでhtmlを生成します。
     - 生成された、内容物が、github pageの書き出し先に設定している docs/ ディレクトリの内容を確認してcommitしてpushします。
+
+## Daily work
+
+- 他のマシンで、作業してpublishしているとconflict起きやすいから、まずは、git pullする習慣があるといいよ。

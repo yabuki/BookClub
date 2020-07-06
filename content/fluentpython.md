@@ -36,7 +36,7 @@ Fluent Pythonを何らかの合法的な手段で参照できる人。図書館�
 - 申し込み管理
     - [輪読会会場 on discord - connpass](https://book-club.connpass.com/)
 - 主に音声で、サブとしてchatを使って読書会を実施する
-    - discord discordサーバへの招待リンクは後日貼ります。
+    - discord discordサーバへの招待リンクは<https://discord.com/invite/U3ADkMG>です。ブラウザだと、<https://discord.com/channels/709792529725521970/709792529725521973>です。discordのサーバ名は「輪読会会場」(「」の中身だけ)です。
 
 上記の規約は、参加者各位で確認しておいてください。あと、ワイワイやるので、何かを発言したら、なぜそうなのか。は聴かれると思うので質問されるのが嫌いな人は辛いかも。
 

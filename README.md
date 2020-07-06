@@ -16,9 +16,8 @@
 
 ### hugo
 
-1. hugoのインストールをする。私の場合は、Debianなので
-
- `# apt install hugo`
+1. hugoのインストールをする。
+    - 私の場合は、Debianなので `# apt install hugo` でインストールした。
 
 1. リポジトリをcloneしてくる この時に、--recursive を忘れていると、別の手当て方法が必要になる。
 1. テーマをgit submodule する。

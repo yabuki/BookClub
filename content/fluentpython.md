@@ -82,6 +82,10 @@ Web/PC向けDesktop 用Electronアプリ/スマートフォンアプリなどが
 
 慣れない間は、マイクをミュートにして、聞き専になるのもいいでしょう。
 
+### サンプルコードのリポジトリ
+
+- [Fluent Python](https://github.com/fluentpython)
+
 #### その他
 
 何かあったら追加する。

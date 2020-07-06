@@ -10,7 +10,7 @@
 - github page は、docs の下です。
 - hugoを使ってmarkdownからhtmlを生成しています。
     - contentsの下が生成する元markdownファイルの置き場所です。
-- connpass用の文書置き場は TBD です。
+- connpass用の文書置き場は ann の下です。
 
 ## 環境の作り方
 
@@ -18,7 +18,7 @@
 
 1. hugoのインストールをする。私の場合は、Debianなので
 
- # apt install hugo
+ `# apt install hugo`
 
 1. リポジトリをcloneしてくる この時に、--recursive を忘れていると、別の手当て方法が必要になる。
 1. テーマをgit submodule する。

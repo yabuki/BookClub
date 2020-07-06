@@ -26,3 +26,8 @@
     - git clone 時に、--recursiveを付け忘れていたら、`git submodule update --init --recursive` しましょう。
 1. hugo server -D でドラフト状態のテキストを手元のブラウザで、<http://localhost:1313/BookClub/>を見ながら編集しましょう。
     - なお、新しく記事を作るなら、hugo new ファイル名です。
+1. 納得行くまで、作業したら、まずはコミットして作業内容を記録しておきましょう。
+1. 次は、htmlの生成です。
+    - 作成したファイルの上部にある draft: true をfalseに変えて、fileをsaveして、コミットしておきましょう。
+    - リポジトリの直下に移動して、hugoコマンドでhtmlを生成します。
+    - 生成された、内容物が、github pageの書き出し先に設定している docs/ ディレクトリの内容を確認してcommitしてpushします。

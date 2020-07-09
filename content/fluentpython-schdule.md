@@ -41,8 +41,17 @@ keywords:
 |20|属性ディスクリプタ|657p-686p|2020-08-28||
 |21|クラスメタプログラミング|687p-714p|2020-08-31||
 
+### Google calendar
+
+<iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;ctz=Asia%2FTokyo&amp;src=Zmo2Y3VqZW8zcTZoaTZpdjEwM2gzdml1dGNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;src=amEuamFwYW5lc2UjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&amp;color=%23795548&amp;color=%23009688&amp;showCalendars=0&amp;showTabs=0" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+### iCal
+
+<https://calendar.google.com/calendar/ical/fj6cujeo3q6hi6iv103h3viutc%40group.calendar.google.com/public/basic.ics>
+
 ## 想定している読み方
 
 平日の月水金19:30から20:30に開催、予習と復習は、火木土日曜日を想定している。まずは読みきることを優先する。読めば理解が足りない部分は自覚できるだろうという想定です。
 
 それでも7週間、だいたい2ヶ月かかる。予定です。
+

@@ -109,9 +109,9 @@
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-07-13. Published at: 2020-07-10.">
+      <span title="Lastmod: 2020-07-15. Published at: 2020-07-10.">
         
-          Lastmod: 2020-07-13
+          Lastmod: 2020-07-15
         
       </span>
     </div>
@@ -201,6 +201,34 @@
 <h3 id="疑問点">疑問点</h3>
 <ul>
 <li>Pythonのデータモデルとは、どのように説明したらいいのか。</li>
+</ul>
+<h3 id="読書会で話題になったこと">読書会で、話題になったこと。</h3>
+<p>chatに貼り付けてもらったとか、話題にでたのを主に書き残しておく。</p>
+<ul>
+<li>Python 入門ノート</li>
+<li><a href="https://gihyo.jp/book/2020/978-4-297-11111-3">Python実践入門 ──言語の力を引き出し、開発効率を高める：書籍案内｜技術評論社</a></li>
+<li><a href="https://paiza.io/en/projects/new?language=python3">Python Online | Online editor and compiler</a></li>
+<li><a href="https://qiita.com/Seny/items/add4d03876f505442136">namedtupleで美しいpythonを書く！（翻訳） - Qiita</a>
+<ul>
+<li>namedtuple使いでがあるよね。って話</li>
+</ul>
+</li>
+<li>DataClassも使いでがあるよね。いま読んでいるFluentPython日本語版は、主にpython3.3までの話題を取り扱っているので、DataClassの話はでてこないけど、discordのpythonコミュニティで話題になっていた。という話
+<ul>
+<li><a href="https://www.python.jp/pages/pythonjp_discord.html">Pythonjp Discord Server</a></li>
+</ul>
+</li>
+<li>pylanceの話題。</li>
+<li>用語集は先に読んでおくといいね。</li>
+<li>使っているpythonの開発環境の話題。ice breakにはいいかもね。</li>
+<li>Fluent Pythonのサンプルプログラムのライセンスは、MITであるとのこと。
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/LICENSE">example-code/LICENSE at master · fluentpython/example-code</a></li>
+<li><a href="https://github.com/fluentpython/example-code">fluentpython/example-code: Example code for the book Fluent Python</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/01-data-model/frenchdeck.py">example-code/frenchdeck.py at master · fluentpython/example-code</a></li>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/01-data-model/vector2d.py">example-code/vector2d.py at master · fluentpython/example-code</a></li>
 </ul>
 <h2 id="2章-シーケンスの配列">2章 シーケンスの配列</h2>
 <p>pythonに関係深い、ABCという言語の話が導入となる。</p>
@@ -581,6 +609,15 @@
 </ul>
 <h3 id="54-7つの呼び出し可能オブジェクト">5.4 7つの呼び出し可能オブジェクト</h3>
 <p>呼び出しオブジェクトについて、列挙し、コメントをして理解しやすくしてくれている。後のために、ジェネレータ関数の所で、コルーチンについて言及している。また呼び出し可能か判定するのは、そのオブジェクトのcallable()を呼んでみる。のを実例を入れて書いている。p154-p156</p>
+<h3 id="55-呼び出し可能なユーザ定義型">5.5 呼び出し可能なユーザ定義型</h3>
+<p><a href="https://github.com/fluentpython/example-code/blob/master/05-1class-func/bingocall.py">example-code/bingocall.py at master · fluentpython/example-code</a>
+- インスタンス化する時にクラスを実行する
+- インスタンス化したオブジェクトを実行すると、 __call__(self):を定義してどんな戻り値にするか決めることができる。</p>
+<dl>
+<dt>疑問点</dt>
+<dd>p157で書いてある、クラスに、 __call__ を実装すれば、の下りは、ここで何を言っているのか意味がよく分からない。他の人とも議論してみたい。</dd>
+</dl>
+<h3 id="56-関数のイントロスペクション">5.6 関数のイントロスペクション</h3>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -635,6 +672,7 @@
       <ul>
         <li><a href="#11-pythonicなトランプ">1.1 Pythonicなトランプ</a></li>
         <li><a href="#疑問点">疑問点</a></li>
+        <li><a href="#読書会で話題になったこと">読書会で、話題になったこと。</a></li>
       </ul>
     </li>
     <li><a href="#2章-シーケンスの配列">2章 シーケンスの配列</a>
@@ -685,6 +723,8 @@
         <li><a href="#52-高階関数">5.2 高階関数</a></li>
         <li><a href="#53-無名関数">5.3 無名関数</a></li>
         <li><a href="#54-7つの呼び出し可能オブジェクト">5.4 7つの呼び出し可能オブジェクト</a></li>
+        <li><a href="#55-呼び出し可能なユーザ定義型">5.5 呼び出し可能なユーザ定義型</a></li>
+        <li><a href="#56-関数のイントロスペクション">5.6 関数のイントロスペクション</a></li>
       </ul>
     </li>
   </ul>

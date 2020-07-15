@@ -116,6 +116,26 @@ lenがメソッドでないのは、そうとう議論になったから何度�
 
 * Pythonのデータモデルとは、どのように説明したらいいのか。
 
+### 読書会で、話題になったこと。
+
+chatに貼り付けてもらったとか、話題にでたのを主に書き残しておく。
+
+- Python 入門ノート
+- [Python実践入門 ──言語の力を引き出し、開発効率を高める：書籍案内｜技術評論社](https://gihyo.jp/book/2020/978-4-297-11111-3)
+- [Python Online | Online editor and compiler](https://paiza.io/en/projects/new?language=python3)
+- [namedtupleで美しいpythonを書く！（翻訳） - Qiita](https://qiita.com/Seny/items/add4d03876f505442136)
+    - namedtuple使いでがあるよね。って話
+- DataClassも使いでがあるよね。いま読んでいるFluentPython日本語版は、主にpython3.3までの話題を取り扱っているので、DataClassの話はでてこないけど、discordのpythonコミュニティで話題になっていた。という話
+    - [Pythonjp Discord Server](https://www.python.jp/pages/pythonjp_discord.html)
+- pylanceの話題。
+- 用語集は先に読んでおくといいね。
+- 使っているpythonの開発環境の話題。ice breakにはいいかもね。
+- Fluent Pythonのサンプルプログラムのライセンスは、MITであるとのこと。
+    - [example-code/LICENSE at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/LICENSE)
+    - [fluentpython/example-code: Example code for the book Fluent Python](https://github.com/fluentpython/example-code)
+- [example-code/frenchdeck.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/01-data-model/frenchdeck.py)
+- [example-code/vector2d.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/01-data-model/vector2d.py)
+
 ## 2章 シーケンスの配列
 
 pythonに関係深い、ABCという言語の話が導入となる。

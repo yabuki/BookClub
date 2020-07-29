@@ -109,9 +109,9 @@
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-07-28. Published at: 2020-07-10.">
+      <span title="Lastmod: 2020-07-29. Published at: 2020-07-10.">
         
-          Lastmod: 2020-07-28
+          Lastmod: 2020-07-29
         
       </span>
     </div>
@@ -658,6 +658,77 @@ nonlocalで解決できる問題</li>
 <h3 id="71-デコレータの基礎">7.1 デコレータの基礎</h3>
 <p>どういう動作をするか。についてのチュートリアル。</p>
 <h3 id="72-デコレータ実行のタイミング">7.2 デコレータ実行のタイミング</h3>
+<p>ここのキモは、デコレータの実行タイミングを書いており、インポート時に何が起きているのか。を書いている所です。たしかに、そういう風に動くにはこのタイミングか。というのは理解できる。</p>
+<h3 id="73-デコレータを使った-strategy-パターンの改善">7.3 デコレータを使った Strategy パターンの改善</h3>
+<p>例7-3は、<a href="https://github.com/fluentpython/example-code/blob/master/07-closure-deco/strategy_best4.py">example-code/strategy_best4.py at master · fluentpython/example-code</a> が該当する</p>
+<p>動いているコードで、理解を深めるのがいい。</p>
+<h3 id="74-変数スコープ">7.4 変数スコープ</h3>
+<p>ここで、pythonでのスコープを確認する。</p>
+<p>例7-4, 例7-5 は、<a href="https://github.com/fluentpython/example-code/blob/master/07-closure-deco/global_x_local.rst">example-code/global_x_local.rst at master · fluentpython/example-code</a>　が該当するようだ。</p>
+<p>ローカル変数を、globalとして扱うための説明で、nonlocalの説明の前フリである。</p>
+<h3 id="75-クロージャ">7.5 クロージャ</h3>
+<p>クロージャは、理解されにくいのか。違うモノと混同されている。</p>
+<ul>
+<li>例 7-8
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/07-closure-deco/average_oo.py">example-code/average_oo.py at master · fluentpython/example-code</a></li>
+</ul>
+</li>
+<li>例 7-9
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/07-closure-deco/average.py">example-code/average.py at master · fluentpython/example-code</a></li>
+</ul>
+</li>
+</ul>
+<p>図 7-1 ここの自由変数の図を読もう。</p>
+<p>これ、例7-11 例7-12など</p>
+<h3 id="76-nonlocal宣言">7.6 nonlocal宣言</h3>
+<p>例 7-13 例 7-14 も既存か。</p>
+<p>ここの説明が、python3になって、nonlocalが導入された説明になる。python2においてのやり方が書いている。p206</p>
+<h3 id="77-シンプルなデコレータの実装">7.7 シンプルなデコレータの実装</h3>
+<h4 id="771-コードの解説">7.7.1 コードの解説</h4>
+<p>__name__ と __doc__ を覆い隠さないバージョン で、なんでこうなるかについても説明している。</p>
+<p>functoolsのなかにある functools.wraps は、<a href="https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.wraps">functools &mdash; 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント</a> であり、functools.update_wraps <a href="https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.update_wrapper">functools &mdash; 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント</a> を呼んでいるので、こっちも見る必要がある。</p>
+<h3 id="78-標準ライブラリのデコレータ">7.8 標準ライブラリのデコレータ</h3>
+<p>property, classmethod, staticmethodの説明は後にするとのこと。functools.wraps は、既に紹介した。lru_cacheとsingledispatchの説明をするとのこと。</p>
+<h4 id="781-functoolslru_cache-を用いたメモ化">7.8.1 functools.lru_cache を用いたメモ化</h4>
+<dl>
+<dt>メモ化</dt>
+<dd>ここのnoteの主旨からは外れるかも知れないが、lru_cache を「メモ化」という表現は、pythonにおける定訳だと気がつくまで、かなり違和感があった。
+lru_cacheの概念を「メモ化」という概念で日本語として互換だと消化するまでに時間がかかったからです。記録してすぐに参照するというコアなアイディアを共有すると良かったのだと今にしては思う。納得しがたかったのは、自分が、lru_cacheの動作の方から考えていたからなのだろう。</dd>
+</dl>
+<p>ここでのコア・アイディアは、一回実行した結果をlru方式で記録しておく。その時の条件として、入力が一定なら、必ず同じ出力をするのであれば再利用が可能だから。というもの。なので引数と出力をメモっておく。ただ気をつけないといけないのは、プログラム内部で、乱数や時刻などを参照していると同じ結果にならないので、何でもかんでもメモ化していいという話にはならない。</p>
+<p>また、キャッシュをシステムで多重に持つと副作用があるので、どのレイヤーて何のキャッシュを持っているのか。を設計時に決めておかないといけない気がする。そのためには、最初からパフォーマンス計測を計画して、プログラムに組み込んでおく用心深さがいるのかもしれない。</p>
+<p>当てずっぽでなく、データを収集する。は、話がfluent pythonから脱線したが、デコレータで気軽につかえるlru_cacheは、プログラミングテクニックとして、覚えておくのは良い。ちょっとずつ違うことを繰り返し参照する場面では強力な手助けになるだろう。</p>
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/07-closure-deco/fibo_demo.py">example-code/fibo_demo.py at master · fluentpython/example-code</a></li>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/07-closure-deco/fibo_demo_lru.py">example-code/fibo_demo_lru.py at master · fluentpython/example-code</a></li>
+</ul>
+<h4 id="782-シングルディスパッチのジェネリック関数">7.8.2 シングルディスパッチのジェネリック関数</h4>
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/07-closure-deco/generic.py">example-code/generic.py at master · fluentpython/example-code</a></li>
+</ul>
+<p>パッと見には、JavaやC++のオーバーロードと同等に感じるかも知れないが、p215で書かれている内容を、いまは理解できていない。得失点まで含めて人に説明できるようにならないと理解したとは言えないだろうし。</p>
+<p>ここでの、抽象基底クラス(ABC)推しも、体感してみるのと、その便利さは何が代償なのかを確認しないとよくわからない。コードの拡張性とのトレードオフは、実行速度だったりすることもある。でも、pythonで書いている時点で、ある程度割り切りはできているはずで、その基準内であれば拡張性を優先するのはありえる話です。</p>
+<h3 id="79-多重デコレータ">7.9 多重デコレータ</h3>
+<p>デコレータを複数回実行すると何が起きているのかを記述している。p214</p>
+<p>pythonポケットリファレンスのp273 16-1-7 デコレータ構文を利用する</p>
+<p>の記述では、よくわからない挙動の確認に。ここと次の部分は有用だと感じた。</p>
+<h3 id="710-パラメータ化デコレータ">7.10 パラメータ化デコレータ</h3>
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/07-closure-deco/registration.py">example-code/registration.py at master · fluentpython/example-code</a></li>
+</ul>
+<p>p216 の本節の最初の行を、なぜにpythonポケットリファレンスは、書いていないのか。経験を積むとわかるのだろうか。でも紙面が少ないから削られたのか。わからないけどもここは、自分で書き込みをして補っておく場面だよな。</p>
+<p>いや、本に書き込むスペースぐらいでは足りないので、書き付けた紙を挟んでおくと、まだまだ書けるぞ。</p>
+<h4 id="7101-登録デコレータのパラメータ化">7.10.1 登録デコレータのパラメータ化</h4>
+<p>p217 ここで、デコレータファクトリの説明をしている。</p>
+<h4 id="7102-clockデコレータのパラメータ化">7.10.2 clockデコレータのパラメータ化</h4>
+<h3 id="711-本章のまとめ">7.11 本章のまとめ</h3>
+<p>メタプログラミングの入り口かぁ。</p>
+<h3 id="712-参考文献">7.12 参考文献</h3>
+<p>Soapbox の「自由変数」に関する記述が気になった。</p>
+<p>あと、pythonのデコレータと、デザインパターンのDecorator</p>
+<h2 id="8章-オブジェクト参照可変性リサイクル">8章 オブジェクト参照、可変性、リサイクル</h2>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -783,8 +854,19 @@ nonlocalで解決できる問題</li>
       <ul>
         <li><a href="#71-デコレータの基礎">7.1 デコレータの基礎</a></li>
         <li><a href="#72-デコレータ実行のタイミング">7.2 デコレータ実行のタイミング</a></li>
+        <li><a href="#73-デコレータを使った-strategy-パターンの改善">7.3 デコレータを使った Strategy パターンの改善</a></li>
+        <li><a href="#74-変数スコープ">7.4 変数スコープ</a></li>
+        <li><a href="#75-クロージャ">7.5 クロージャ</a></li>
+        <li><a href="#76-nonlocal宣言">7.6 nonlocal宣言</a></li>
+        <li><a href="#77-シンプルなデコレータの実装">7.7 シンプルなデコレータの実装</a></li>
+        <li><a href="#78-標準ライブラリのデコレータ">7.8 標準ライブラリのデコレータ</a></li>
+        <li><a href="#79-多重デコレータ">7.9 多重デコレータ</a></li>
+        <li><a href="#710-パラメータ化デコレータ">7.10 パラメータ化デコレータ</a></li>
+        <li><a href="#711-本章のまとめ">7.11 本章のまとめ</a></li>
+        <li><a href="#712-参考文献">7.12 参考文献</a></li>
       </ul>
     </li>
+    <li><a href="#8章-オブジェクト参照可変性リサイクル">8章 オブジェクト参照、可変性、リサイクル</a></li>
   </ul>
 </nav></div>
   

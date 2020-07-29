@@ -753,5 +753,110 @@ p194にある。
 
 ### 7.2 デコレータ実行のタイミング
 
+ここのキモは、デコレータの実行タイミングを書いており、インポート時に何が起きているのか。を書いている所です。たしかに、そういう風に動くにはこのタイミングか。というのは理解できる。
+
+### 7.3 デコレータを使った Strategy パターンの改善
+
+例7-3は、[example-code/strategy_best4.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/07-closure-deco/strategy_best4.py) が該当する
+
+動いているコードで、理解を深めるのがいい。
+
+### 7.4 変数スコープ
+
+ここで、pythonでのスコープを確認する。
+
+例7-4, 例7-5 は、[example-code/global_x_local.rst at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/07-closure-deco/global_x_local.rst)　が該当するようだ。
+
+ローカル変数を、globalとして扱うための説明で、nonlocalの説明の前フリである。
+
+### 7.5 クロージャ
+
+クロージャは、理解されにくいのか。違うモノと混同されている。
+
+- 例 7-8
+    - [example-code/average_oo.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/07-closure-deco/average_oo.py)
+- 例 7-9
+    - [example-code/average.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/07-closure-deco/average.py)
+
+
+図 7-1 ここの自由変数の図を読もう。
+
+これ、例7-11 例7-12など
+
+### 7.6 nonlocal宣言
+
+例 7-13 例 7-14 も既存か。
+
+ここの説明が、python3になって、nonlocalが導入された説明になる。python2においてのやり方が書いている。p206
+
+### 7.7 シンプルなデコレータの実装
+
+#### 7.7.1 コードの解説
+
+\_\_name\_\_ と \_\_doc\_\_ を覆い隠さないバージョン で、なんでこうなるかについても説明している。
+
+functoolsのなかにある functools.wraps は、[functools --- 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.wraps) であり、functools.update\_wraps [functools --- 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.update_wrapper) を呼んでいるので、こっちも見る必要がある。
+
+### 7.8 標準ライブラリのデコレータ
+
+property, classmethod, staticmethodの説明は後にするとのこと。functools.wraps は、既に紹介した。lru\_cacheとsingledispatchの説明をするとのこと。
+
+#### 7.8.1 functools.lru\_cache を用いたメモ化
+
+メモ化
+: ここのnoteの主旨からは外れるかも知れないが、lru\_cache を「メモ化」という表現は、pythonにおける定訳だと気がつくまで、かなり違和感があった。
+lru\_cacheの概念を「メモ化」という概念で日本語として互換だと消化するまでに時間がかかったからです。記録してすぐに参照するというコアなアイディアを共有すると良かったのだと今にしては思う。納得しがたかったのは、自分が、lru\_cacheの動作の方から考えていたからなのだろう。
+
+ここでのコア・アイディアは、一回実行した結果をlru方式で記録しておく。その時の条件として、入力が一定なら、必ず同じ出力をするのであれば再利用が可能だから。というもの。なので引数と出力をメモっておく。ただ気をつけないといけないのは、プログラム内部で、乱数や時刻などを参照していると同じ結果にならないので、何でもかんでもメモ化していいという話にはならない。
+
+また、キャッシュをシステムで多重に持つと副作用があるので、どのレイヤーて何のキャッシュを持っているのか。を設計時に決めておかないといけない気がする。そのためには、最初からパフォーマンス計測を計画して、プログラムに組み込んでおく用心深さがいるのかもしれない。
+
+当てずっぽでなく、データを収集する。は、話がfluent pythonから脱線したが、デコレータで気軽につかえるlru\_cacheは、プログラミングテクニックとして、覚えておくのは良い。ちょっとずつ違うことを繰り返し参照する場面では強力な手助けになるだろう。
+
+- [example-code/fibo_demo.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/07-closure-deco/fibo_demo.py)
+- [example-code/fibo_demo_lru.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/07-closure-deco/fibo_demo_lru.py)
+
+#### 7.8.2 シングルディスパッチのジェネリック関数
+
+- [example-code/generic.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/07-closure-deco/generic.py)
+
+パッと見には、JavaやC++のオーバーロードと同等に感じるかも知れないが、p215で書かれている内容を、いまは理解できていない。得失点まで含めて人に説明できるようにならないと理解したとは言えないだろうし。
+
+ここでの、抽象基底クラス(ABC)推しも、体感してみるのと、その便利さは何が代償なのかを確認しないとよくわからない。コードの拡張性とのトレードオフは、実行速度だったりすることもある。でも、pythonで書いている時点で、ある程度割り切りはできているはずで、その基準内であれば拡張性を優先するのはありえる話です。
+
+### 7.9 多重デコレータ
+
+デコレータを複数回実行すると何が起きているのかを記述している。p214
+
+pythonポケットリファレンスのp273 16-1-7 デコレータ構文を利用する
+
+の記述では、よくわからない挙動の確認に。ここと次の部分は有用だと感じた。
+
+### 7.10 パラメータ化デコレータ
+
+- [example-code/registration.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/07-closure-deco/registration.py)
+
+p216 の本節の最初の行を、なぜにpythonポケットリファレンスは、書いていないのか。経験を積むとわかるのだろうか。でも紙面が少ないから削られたのか。わからないけどもここは、自分で書き込みをして補っておく場面だよな。
+
+いや、本に書き込むスペースぐらいでは足りないので、書き付けた紙を挟んでおくと、まだまだ書けるぞ。
+
+#### 7.10.1 登録デコレータのパラメータ化
+
+p217 ここで、デコレータファクトリの説明をしている。
+
+#### 7.10.2 clockデコレータのパラメータ化
+
+### 7.11 本章のまとめ
+
+メタプログラミングの入り口かぁ。
+
+### 7.12 参考文献
+
+Soapbox の「自由変数」に関する記述が気になった。
+
+あと、pythonのデコレータと、デザインパターンのDecorator
+
+## 8章 オブジェクト参照、可変性、リサイクル
+
 
 

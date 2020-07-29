@@ -729,6 +729,86 @@ lru_cacheの概念を「メモ化」という概念で日本語として互換�
 <p>Soapbox の「自由変数」に関する記述が気になった。</p>
 <p>あと、pythonのデコレータと、デザインパターンのDecorator</p>
 <h2 id="8章-オブジェクト参照可変性リサイクル">8章 オブジェクト参照、可変性、リサイクル</h2>
+<p>8章のテーマは、オブジェクトと、オブジェクトにつけられた「名前」の区別をする。という話とのこと。</p>
+<p>一時期よく見かけた、変数は箱のメタファーは間違っている。という話をpythonからの視点で説明する。</p>
+<ul>
+<li>オブジェクトの同一性(identity)</li>
+<li>値(value)</li>
+<li>エイリアス(alias)</li>
+</ul>
+<p>の概念を説明し、shallow copyとdeep copy を説明する。</p>
+<h3 id="81-変数--箱">8.1 変数 != 箱</h3>
+<p>確保されたメモリ領域へのラベルという解釈をした。</p>
+<h3 id="82-同一性等価性エイリアス">8.2 同一性、等価性、エイリアス</h3>
+<p>例 8-3 は、とくに簡単なのでサンプルプログラムはない模様。同じオブジェクトを別の名前が、指している例</p>
+<p>aliasと、同じ値のオブジェクトを持っているだけでは、意味が違う。この意味は、誤解しているとバグう生みそう。</p>
+<p>p233の、Python言語リファレンスの引用、 <a href="https://docs.python.org/ja/3/reference/datamodel.html#objects-values-and-types">3. データモデル — Python 3.8.5 ドキュメント</a>
+は、fluent pythonの訳と、有志で日本語にしている訳では、表現は異なっていますが、大意は同じものだと思うので、左記にlinkをはっておきました。</p>
+<p>内容が同じでも、オブジェクトのID<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup> は異なる。実装依存であっても、形式と意味する内容が決められているという部分が大事で、オブジェクトが存在している間は不変だということがキモっぽい。</p>
+<h4 id="821--と-is-の使い分け">8.2.1 == と is の使い分け</h4>
+<p>この部分、pythonポケットリファレンスだと、さすがに記述はあってもどういう風に使うのかを理解できるようになるのを期待したい。</p>
+<p>典型例として、</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">x</span> <span class="ow">is</span> <span class="bp">None</span>
+<span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+</code></pre></div><p>があるので、Noneかどうかを高速に比較したい。という、検査目的を感じた。</p>
+<p>ダンダーとして、 __eq__ の話に及んでいるので、2つのオブジェクトが、中身を検査するのが、コストが高いというのは理解できたと思う。shallow copyやdeep copyへのネタ振りでもあろう。</p>
+<h4 id="822-タプルの相対的な不変性">8.2.2 タプルの相対的な不変性</h4>
+<p>ここのタプルが不変だという話を理解しておかないと、参照先では変化しうるけど、タプルなんで、そんなことない。って思い込みそうなので、読んでおきましょう。</p>
+<h3 id="83-デフォルトのコピーは浅い">8.3 デフォルトのコピーは「浅い」</h3>
+<p>ここの実験も、見ているだけだと、そうやな。って思うだけ。で、期待しない動きになってから、ここを読み返すことになる。</p>
+<h4 id="831-任意のオブジェクトの深いコピーと浅いコピー">8.3.1 任意のオブジェクトの「深い」コピーと「浅い」コピー</h4>
+<p>deep copy と shallow copyの話。</p>
+<p>例 8-8 生徒を乗せたり降ろしたりするバス</p>
+<p>のコード例は、</p>
+<p><a href="https://github.com/fluentpython/example-code/blob/master/08-obj-ref/bus.py">example-code/bus.py at master · fluentpython/example-code</a></p>
+<p>上記のコードを使って</p>
+<ul>
+<li>copy</li>
+<li>deepcopy</li>
+</ul>
+<p>の実例</p>
+<h3 id="84-参照としての関数の引数">8.4 参照としての関数の引数</h3>
+<p>pythonは、共有渡し(call by sharing)だけということだが、c言語をやってきた自分には、call by valueとcall by referenceという言い方が馴染んでいる。</p>
+<h4 id="841-引数のデフォルト値に可変型を使うのは考えもの">8.4.1 引数のデフォルト値に可変型を使うのは考えもの</h4>
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/08-obj-ref/haunted_bus.py">example-code/haunted_bus.py at master · fluentpython/example-code</a></li>
+</ul>
+<p>問題があることを、例 8-12 可変なデフォルト値の危険性を説明する簡単なクラス で説明している。生徒の幽霊がでるお化けバス haunted bugってことみたい。</p>
+<h4 id="842-可変な引数を使うプログラムを頑強に">8.4.2 可変な引数を使うプログラムを頑強に</h4>
+<p>例 8-15 引数変更の危険性を示す簡単なクラスとして下記の例がでている。</p>
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/08-obj-ref/twilight_bus.py">example-code/twilight_bus.py at master · fluentpython/example-code</a></li>
+</ul>
+<p>passengerのチェックをすることで、独立というか、別物にできる。ここは、また訪れて確認しないとわかった気にならないな。</p>
+<h3 id="85-delとガベージコレクション">8.5 delとガベージコレクション</h3>
+<p>delは、名前を削除し、ガベージコレクションは、オブジェクトを削除する。CPythonのガベージコレクションは、reference counterを使っているとのこと。ガベージコレクションはそれだけで、一つの学ぶべき分野であるが、fluent python p245 ではreference cunterの説明がなされている。</p>
+<p>weakref.finalize ってので、オブジェクトが削除されたときに実行されるコールバックを設定できることを知る。</p>
+<p>名前を削除すると、到達性がなくなり、ガベージコレクションを動くという連鎖が理解できたらいいのかな。</p>
+<p>CPython 2.0 は、世代別ガベージコレクターとあるが、脚注に、監訳者からの説明あり。 p245</p>
+<h3 id="86-弱参照">8.6 弱参照</h3>
+<p>オブジェクトで、置いておく必要がないもの。本書では、cacheが例に上がってきている。を積極的にメモリーへ返却したい時にどうするか。という話と、こんなん事前に調べとかないとわかる訳ないやん。的なtipsもあって、p247 の部分はまた再訪します。</p>
+<h4 id="861-コントweak-value-dictionary">8.6.1 コント「Weak Value Dictionary」</h4>
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/08-obj-ref/cheese.py">example-code/cheese.py at master · fluentpython/example-code</a></li>
+</ul>
+<p>解説を読んでも、疑問だったので、globalの定義を読み直さないと間違えそう。他の言語のフワッとした感覚だといかんな。pythonポケットリファレンス p183にて確認する。</p>
+<p>私の理解によるスコープは、2つの条件で決定される。</p>
+<ol>
+<li>使用する場所(宣言する、確保すると考えてもいい) #A</li>
+<li>代入する場所 #B</li>
+</ol>
+<p>#Aが関数外で宣言というか確保されていると、グローバル変数となり、関数宣言をしてから、グローバルと同じ関数名を使って代入をすると、別途ローカル変数として扱われる。グローバル変数にアクセスしたいなら、global宣言が必要。というか別の名前にするという手で問題にならないのか。古き変数名に属性を持たせるという方式だったら困らないってことか。</p>
+<p>また、グローバル変数は行儀がよくないから、クラスの中に閉じ込めるクラス変数などに閉じ込めるので、ここを意識してこなっかった。</p>
+<p>クロージャの場合は、関数宣言をして、そのまた中から、外の関数で定義された自由変数にアクセスする。ただ変数を見たいというだけなら、再代入を伴わないことはマレなので、やっばりnonlocal宣言は必要か。</p>
+<p>#B の再代入というのがキモな気がする。その時にどの変数にアクセスしたいのかを明確に意識しそう。</p>
+<p>あと、WeakSetの説明は、リファレンスで書いていない、注意すべきことを書いているので読んでおけ。p250</p>
+<h4 id="862-弱参照の制約">8.6.2 弱参照の制約</h4>
+<p>dictやListについての制約があること、そしてその制約を外す方法 p250</p>
+<h3 id="87-pythonが不変型で使っている魔術">8.7 Pythonが不変型で使っている魔術</h3>
+<p>この節は、飛ばしていいとのことで、何周かして余裕があったら読む。</p>
+<h3 id="88-本章のまとめ">8.8 本章のまとめ</h3>
+<p>ここの部分を読んで、内容の確認をする。</p>
+<p>また、Soapboxの「共有渡しによる引数の受け渡し」を読んで、単純に、call by reference という言い方ではいかんというのもわかる。p256</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
@@ -746,6 +826,9 @@ lru_cacheの概念を「メモ化」という概念で日本語として互換�
 </li>
 <li id="fn:5" role="doc-endnote">
 <p>LISPの話? <a href="https://code.i-harness.com/ja-jp/q/91c501">clojure - common lisp wikipedia - 解決方法</a> や一般的には、<a href="https://ja.wikipedia.org/wiki/%E5%A4%9A%E9%87%8D%E3%83%87%E3%82%A3%E3%82%B9%E3%83%91%E3%83%83%E3%83%81">多重ディスパッチ - Wikipedia</a> とも呼ぶようだ。 <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:6" role="doc-endnote">
+<p>識別子というか、このIDって実装依存なんや。 <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -866,7 +949,18 @@ lru_cacheの概念を「メモ化」という概念で日本語として互換�
         <li><a href="#712-参考文献">7.12 参考文献</a></li>
       </ul>
     </li>
-    <li><a href="#8章-オブジェクト参照可変性リサイクル">8章 オブジェクト参照、可変性、リサイクル</a></li>
+    <li><a href="#8章-オブジェクト参照可変性リサイクル">8章 オブジェクト参照、可変性、リサイクル</a>
+      <ul>
+        <li><a href="#81-変数--箱">8.1 変数 != 箱</a></li>
+        <li><a href="#82-同一性等価性エイリアス">8.2 同一性、等価性、エイリアス</a></li>
+        <li><a href="#83-デフォルトのコピーは浅い">8.3 デフォルトのコピーは「浅い」</a></li>
+        <li><a href="#84-参照としての関数の引数">8.4 参照としての関数の引数</a></li>
+        <li><a href="#85-delとガベージコレクション">8.5 delとガベージコレクション</a></li>
+        <li><a href="#86-弱参照">8.6 弱参照</a></li>
+        <li><a href="#87-pythonが不変型で使っている魔術">8.7 Pythonが不変型で使っている魔術</a></li>
+        <li><a href="#88-本章のまとめ">8.8 本章のまとめ</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
   

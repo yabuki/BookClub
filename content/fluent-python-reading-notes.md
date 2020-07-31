@@ -443,7 +443,7 @@ Frozensetには、リテラル表記はない。のでコンストラクタを�
 - dictのキーやsetの要素の順序が、挿入順に依存し、その構造が利用している間に変化することもあるのはどうしてなのか
 - dictやsetに対してイテレーションを行っているとき、それらに要素を追加してはいけないのはなぜなのか
 
-を、説明してくれる。とのこと。内部構造を知ることで、その得失点と(pythonの)低レイヤーを意識することで、性能と仕様を満たすバランスを考えることになるんだろうな。という感じか。メモを書きながら読んでいるので、後で訂正するかも。
+を、説明してくれる。とのこと。内部構造を知ることで、その得失点と(pythonの)低レイヤを意識することで、性能と仕様を満たすバランスを考えることになるんだろうな。という感じか。メモを書きながら読んでいるので、後で訂正するかも。
 
 #### 3.9.1 性能評価実験
 
@@ -509,7 +509,7 @@ Unicodeをpythonで扱ってみて、皆さん慣れてくださいね。のパ�
 
 C言語をやったことがあれば、unsigned charとか、unsigned char \* で操作してる感じよね。って感じの話っぽい。低レベルな技術者[^低レベルな技術者]なら、するすると読み下せそう。
 
-[^低レベルな技術者]: 誤解させる言い方ですね。正確には、低レベルのレイヤーを対象する技術者、アセンブラ/C言語でのシステムプログラミング以下、組み込み系とか、OSとかを触る感じの人です。
+[^低レベルな技術者]: 誤解させる言い方ですね。正確には、低レベルのレイヤを対象する技術者、アセンブラ/C言語でのシステムプログラミング以下、組み込み系とか、OSとかを触る感じの人です。
 
 ここで出てくる、encodeとdecodeの例えは、図があったほうがいいな。本に落書きするか。
 
@@ -809,7 +809,7 @@ lru\_cacheの概念を「メモ化」という概念で日本語として互換�
 
 ここでのコア・アイディアは、一回実行した結果をlru方式で記録しておく。その時の条件として、入力が一定なら、必ず同じ出力をするのであれば再利用が可能だから。というもの。なので引数と出力をメモっておく。ただ気をつけないといけないのは、プログラム内部で、乱数や時刻などを参照していると同じ結果にならないので、何でもかんでもメモ化していいという話にはならない。
 
-また、キャッシュをシステムで多重に持つと副作用があるので、どのレイヤーて何のキャッシュを持っているのか。を設計時に決めておかないといけない気がする。そのためには、最初からパフォーマンス計測を計画して、プログラムに組み込んでおく用心深さがいるのかもしれない。
+また、キャッシュをシステムで多重に持つと副作用があるので、どのレイヤで何のキャッシュを持っているのか。を設計時に決めておかないといけない気がする。そのためには、最初からパフォーマンス計測を計画して、プログラムに組み込んでおく用心深さがいるのかもしれない。
 
 当てずっぽでなく、データを収集する。は、話がfluent pythonから脱線したが、デコレータで気軽につかえるlru\_cacheは、プログラミングテクニックとして、覚えておくのは良い。ちょっとずつ違うことを繰り返し参照する場面では強力な手助けになるだろう。
 
@@ -831,6 +831,8 @@ lru\_cacheの概念を「メモ化」という概念で日本語として互換�
 pythonポケットリファレンスのp273 16-1-7 デコレータ構文を利用する
 
 の記述では、よくわからない挙動の確認に。ここと次の部分は有用だと感じた。
+
+「実践Python3」の 2.4.2 クラスデコレータ p59 に、多重デコレータの適用順がある。クラスが生成されてから、下から上に向かって順に適用されていく。との記述あり。クラスデコレータと、関数デコレータの評価順を一応確認しておくこと。2020/07/31
 
 ### 7.10 パラメータ化デコレータ
 
@@ -937,12 +939,22 @@ pythonは、共有渡し(call by sharing)だけということだが、c言語�
 
 問題があることを、例 8-12 可変なデフォルト値の危険性を説明する簡単なクラス で説明している。生徒の幽霊がでるお化けバス haunted bugってことみたい。
 
+<http://pythontutor.com/live.html#code=%22%22%22%0A%3E%3E%3E%20bus1%20%3D%20HauntedBus%28%5B'Alice',%20'Bill'%5D%29%0A%3E%3E%3E%20bus1.passengers%0A%5B'Alice',%20'Bill'%5D%0A%3E%3E%3E%20bus1.pick%28'Charlie'%29%0A%3E%3E%3E%20bus1.drop%28'Alice'%29%0A%3E%3E%3E%20bus1.passengers%0A%5B'Bill',%20'Charlie'%5D%0A%3E%3E%3E%20bus2%20%3D%20HauntedBus%28%29%0A%3E%3E%3E%20bus2.pick%28'Carrie'%29%0A%3E%3E%3E%20bus2.passengers%0A%5B'Carrie'%5D%0A%3E%3E%3E%20bus3%20%3D%20HauntedBus%28%29%0A%3E%3E%3E%20bus3.passengers%0A%5B'Carrie'%5D%0A%3E%3E%3E%20bus3.pick%28'Dave'%29%0A%3E%3E%3E%20bus2.passengers%0A%5B'Carrie',%20'Dave'%5D%0A%3E%3E%3E%20bus2.passengers%20is%20bus3.passengers%0ATrue%0A%3E%3E%3E%20bus1.passengers%0A%5B'Bill',%20'Charlie'%5D%0A%0A%0A%3E%3E%3E%20dir%28HauntedBus.__init__%29%20%20%23%20doctest%3A%20%2BELLIPSIS%0A%5B'__annotations__',%20'__call__',%20...,%20'__defaults__',%20...%5D%0A%3E%3E%3E%20HauntedBus.__init__.__defaults__%0A%28%5B'Carrie',%20'Dave'%5D,%29%0A%3E%3E%3E%20HauntedBus.__init__.__defaults__%5B0%5D%20is%20bus2.passengers%0ATrue%0A%0A%22%22%22%0A%0A%23%20BEGIN%20HAUNTED_BUS_CLASS%0Aclass%20HauntedBus%3A%0A%20%20%20%20%22%22%22A%20bus%20model%20haunted%20by%20ghost%20passengers%22%22%22%0A%0A%20%20%20%20def%20__init__%28self,%20passengers%3D%5B%5D%29%3A%20%20%23%20%3C1%3E%0A%20%20%20%20%20%20%20%20self.passengers%20%3D%20passengers%20%20%23%20%3C2%3E%0A%0A%20%20%20%20def%20pick%28self,%20name%29%3A%0A%20%20%20%20%20%20%20%20self.passengers.append%28name%29%20%20%23%20%3C3%3E%0A%0A%20%20%20%20def%20drop%28self,%20name%29%3A%0A%20%20%20%20%20%20%20%20self.passengers.remove%28name%29%0A%23%20END%20HAUNTED_BUS_CLASS%0Abus1%20%3D%20HauntedBus%28%5B'Alice',%20'Bill'%5D%29%0Abus1.pick%28'Charlie'%29%0Abus1.drop%28'Alice'%29%0Abus2%20%3D%20HauntedBus%28%29%0Abus2.pick%28'Carrie'%29%0Abus3%20%3D%20HauntedBus%28%29%0Abus3.pick%28'Alice'%29%0Abus2.pick%28'Bill'%29%0Abus2.drop%28'Carrie'%29%0Abus3.pick%28'Carrie'%29%0A&cumulative=false&curInstr=42&heapPrimitives=nevernest&mode=display&origin=opt-live.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false>
+
+で、実行してみて解ったことがある。
+
 #### 8.4.2 可変な引数を使うプログラムを頑強に
 
 例 8-15 引数変更の危険性を示す簡単なクラスとして下記の例がでている。
 - [example-code/twilight_bus.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/08-obj-ref/twilight_bus.py)
 
 passengerのチェックをすることで、独立というか、別物にできる。ここは、また訪れて確認しないとわかった気にならないな。
+
+<http://pythontutor.com/live.html#code=%22%22%22%0A%3E%3E%3E%20basketball_team%20%3D%20%5B'Sue',%20'Tina',%20'Maya',%20'Diana',%20'Pat'%5D%0A%3E%3E%3E%20bus%20%3D%20TwilightBus%28basketball_team%29%0A%3E%3E%3E%20bus.drop%28'Tina'%29%0A%3E%3E%3E%20bus.drop%28'Pat'%29%0A%3E%3E%3E%20basketball_team%0A%5B'Sue',%20'Maya',%20'Diana'%5D%0A%22%22%22%0A%0A%23%20BEGIN%20TWILIGHT_BUS_CLASS%0Aclass%20TwilightBus%3A%0A%20%20%20%20%22%22%22A%20bus%20model%20that%20makes%20passengers%20vanish%22%22%22%0A%0A%20%20%20%20def%20__init__%28self,%20passengers%3DNone%29%3A%0A%20%20%20%20%20%20%20%20if%20passengers%20is%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.passengers%20%3D%20%5B%5D%20%20%23%20%3C1%3E%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.passengers%20%3D%20passengers%20%20%23%3C2%3E%0A%0A%20%20%20%20def%20pick%28self,%20name%29%3A%0A%20%20%20%20%20%20%20%20self.passengers.append%28name%29%0A%0A%20%20%20%20def%20drop%28self,%20name%29%3A%0A%20%20%20%20%20%20%20%20self.passengers.remove%28name%29%20%20%23%20%3C3%3E%0A%23%20END%20TWILIGHT_BUS_CLASS%0Abasketball_team%20%3D%20%5B'Sue',%20'Tina',%20'Maya',%20'Diana',%20'Pat'%5D%0Abus%20%3D%20TwilightBus%28basketball_team%29%0Abus1%20%3D%20TwilightBus%28basketball_team%29%0Abus2%20%3D%20TwilightBus%28basketball_team%29%0Abus1.drop%28%22Tina%22%29%0Abus2.drop%28%22Pat%22%29&cumulative=false&curInstr=26&heapPrimitives=nevernest&mode=display&origin=opt-live.js&py=3&rawInputLstJSON=%5B%5D&textReferences=false>
+
+確保したオブジェクトを使いまわすのは、C言語の、call by referenceと同じように思ってしまうが、本章のSoapboxの部分もあるので、また読み直して理解に努めたい。
+
+なお、前節 「8.4.1 可変な引数を使うプログラムを頑強に」と異なるのは、可変な引数の内容が、[]な時と、そうでない時に、同じオブジェクトを指していないことが確認できる。前者と、初期値を[]かどうかで振り分けている本節のプログラムの差については、理解した気がするが。
 
 ### 8.5 delとガベージコレクション
 
@@ -992,6 +1004,174 @@ dictやListについての制約があること、そしてその制約を外す
 
 ここの部分を読んで、内容の確認をする。
 
-また、Soapboxの「共有渡しによる引数の受け渡し」を読んで、単純に、call by reference という言い方ではいかんというのもわかる。p256
+### 8.9 参考文献
 
 
+### Soapbox
+
+また、Soapboxの「共有渡しによる引数の受け渡し」を読んで、単純に、call by reference という言い方ではいかんというのがやはり理解できていない。p256
+
+> Pythonの関数は引数のコピーを取得しますが、引数は常に参照です。
+> そのため、参照されているオブジェクトの値は可変であれば変更されることもありますが、そのIDは変更できません。
+> また、関数は引数で指定されている参照のコピーを取得するので、再バインドしても関数の外側には影響を与えません。
+
+については、
+
+
+> Pythonの関数は引数のコピーを取得しますが、引数は常に参照です。
+
+多分理解できたとオ思う。
+
+> そのため、参照されているオブジェクトの値は可変であれば変更されることもありますが、そのIDは変更できません。
+
+前段は、そうだと思うが、内容が変わったら、IDが変化するんじゃないのか。IDが変更できないということは、内容を最終的に変わらないということを意味しているのか。
+
+> また、関数は引数で指定されている参照のコピーを取得するので、再バインドしても関数の外側には影響を与えません。
+
+参照のコピーといっても、shallow copyなので、同じオブジェクトを参照しているのではないのか。そして「再バインド」という言葉が出てくるが、何となくの意味でなく、pythonにおける変数の再バインドとは、何か。再代入のことなのか?
+
+という疑問があるので、やっばり理解しているとは思えない。また、わかったら追記する。
+
+
+## 9章 Pythonic なオブジェクト
+
+ここでは、ユーザ定義型を作るテクニックについて学ぶようだ。p259
+
+この章で学ぶのは、
+
+* repr()やbytes()など、オブジェクトを異なる表現で示す各種の組み込み関数を使えるようにする方法
+* 別バージョンのコンストラクタをクラスメソッドとして実装する方法
+* 組み込みメソッドのformat()や、str.format()メソッドが用いる書式指定ミニ言語の拡張方法
+* 読み取り専用属性へのアクセス
+* セットやdictのキーとして、利用するためのハッシュ可能オブジェクト
+* \_\_slots\_\_ によるメモリの節約
+
+と、下記の議論をするようだ。
+
+* @classmethodおよび@staticmethodデコレータをいつ、どのように使用すべきか。
+* Pythonのプライベート属性とプロテクト属性の用法、慣例そして制約
+
+どういう関連でこれを本章に入れているのかは、最初の段階ではよくわからない。読み進めるとおいおいとわかるのだろう。
+
+### 9.1 オブジェクトの表現
+
+* repr() --- \_\_repr\_\_
+* str() --- \_\_str\_\_
+
+の説明をしたあとに、
+
+* \_\_bytes\_\_
+* \_\_format\_\_
+
+をする模様だ。
+
+ってことで、この章もダンダーメソッドについての説明であるようだ。
+
+### 9.2 Vectorクラス再訪
+
+例 9-2
+- [example-code/vector2d_v0.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/09-pythonic-obj/vector2d_v0.py)
+
+typecodeについては、fluent python p52 または、[array --- 効率のよい数値アレイ — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/array.html?highlight=%E3%82%BF%E3%82%A4%E3%83%97%E3%82%B3%E3%83%BC%E3%83%89) にある「型コード」を参照せよ。fluent pythonと、公式ドキュメントの用語が違うのは、訳者が違ったり、翻訳の用語リスト、翻訳メモリが違うのだろう。読者側で、変換して吸収するしかない。
+
+
+### 9.3 別バージョンのコンストラクタ
+
+classmethodについては、まずは気にせずに読み進めて戻るのがいいってこと。?
+
+- [3. データモデル — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/reference/datamodel.html#types) のクラスメソッドで検索
+- [組み込み関数 — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/functions.html?highlight=classmethod#classmethod)
+    - classmethodについては、ここの説明だけで理解するのは難しい。
+
+とか、見ても、もっと端的に説明してもらってから詳細に入ってくれないか。とか思う。
+
+クラスに属している、メソッドをインスタンス経由でなく、「クラス名.メソッド名」という形でアクセスして実行する形になるのかとか思うが、
+
+Effective python 「項目 24:@classmethodポリモルフィズムを使って、オブジェクトをジェネリックに構築する」p64-p68 とりわけ、p67 での、
+インスタンスメソッドポリモルフィズムと、@classmthodポリモルフィズムの対比の記述が参考になるか。
+
+classmethodデコレータの説明は、次節で説明してもらえるようだ。
+
+### 9.4 classmethodとstaticmethod
+
+p264
+> インスタンスでなく、クラスに対する操作を行うメソッドを定義するときに用います。
+
+のこの周辺を読むのと、変数名の慣習について言及がある。あと、クラスに対するは、クラスに属する操作とも読めるか。クラスをインスタンス化しなくもいいというのは、そういう意味にも取れるか。
+
+staticmethodは、classmethodとの対比で出てくる。対称性として、存在しているとなると、どう使うのか。ここに書いてある方法だけなのか。例外はあるかとか思うが、そんなことは、後からでいいか。
+
+### 9.5 出力フォーマット
+
+p265 実際にデリゲートされるメソッドについて書いてある。デリゲートってか実際に動作する部分と書いておくのがいいか。
+
+- 書式指定ミニ言語仕様 [string --- 一般的な文字列操作 — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/string.html#format-specification-mini-language)
+
+- str-format構文の例 [string --- 一般的な文字列操作 — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/string.html#format-examples)
+    - {:}の例もここ。
+
+自分の作ったクラスで、書式指定ミニ言語仕様に沿った、出力をさせたいときにどうするか。を示している。
+
+### 9.6 ハッシュ可能なVector2d
+
+自分の作ったクラスを、Setなどに入れて使いたいなら、ハッシュ可能にする必要がある。そして、p269-274は、その方法についてプログラムを交えて説明している。
+
+- 例9-9
+    - [example-code/vector2d_v3.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/09-pythonic-obj/vector2d_v3.py)
+
+上記で、実装されているダンダーたち、読み取り専用プロパティにする。@propertyデコレータの詳細は19章になるとのこと。19章に至ったら戻ってくるか。
+
+そして、 \_\_hash\_\_ として、どういう値が良いのかの例を出している。必ずしも必須ではないが、事実上readonlyなプロバティにする必要があったのもここで説明される。p271
+
+### 9.7 プライベート属性と「プロテクト」属性
+
+プライベート属性がどうやって実装されているのかを明らかにして、Pythonプログラマは自分で自分の足を撃ち抜ける自由もある。ので、正気なプログラマに便利な方法を提供している。
+
+### 9.8 クラス属性 \_\_slots\_\_ によるメモリ節約
+
+- 例9-11
+    - [example-code/vector2d_v3_slots.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/09-pythonic-obj/vector2d_v3_slots.py)
+
+ここの記述を使うハメになるのなら、NumPyやPandasを検討しようというのは良い。
+
+#### 9.8.1 \_\_slots\_\_ の問題点
+
+p280 使うなら読んどけ。
+
+### 9.9 クラス属性の上書き
+
+クラス名で動作を変えたい時に役立つ。
+
+### 9.10 本章のまとめ
+
+### 9.11 参考文献
+
+### Soapbox
+
+
+## 仮置場
+
+### ジェネリック
+
+言葉としてはよく聞くが、具体的な定義なしにフワッと使っていないか?読み落としているだけかもしれないが。動的言語なので、どのクラスに入っても有効に使える関数として書くという意味であれば、下記のmixinに近接した概念になるのではないか。下のmix-inも参照せよ。
+
+### mix-in
+
+- [［Python入門］多重継承とmixin (1/2)：Python入門 - ＠IT](https://www.atmarkit.co.jp/ait/articles/1909/03/news021.html)
+    - 多重継承すると、何が問題となるか。、別のクラスの変数は、同じ名前で、同じクラスに入れても「別の変数」である。
+    - あ、ここの説明は、継承関係は派生した側(下側)から、親に向かって矢印を引く流儀や。
+    - mixinっていうても、継承の使い方で、「特別なキーワード」をつけて別の呼び方をしている訳じゃない。
+    - mixin側は、self経由でごにょごにょするコードを書く。ここの意味が、Effective pythonのp74にある「Pythonでは、mix-inを書くのが容易です。それは、型にかかわらず現在の状態を調べるのが簡単にできるからです。動的インスペクションのおかげで、他の多くのクラスにも適用できるジェネリックな機能をmix-inで一度に書くことができるのです。」ということで、Pythonでいうジェネリックという概念は、この意味であると仮に理解しておく。後でまた変えるかも。
+    - クラス階層という言葉があり、mix-inは、どのクラス階層にも入れることができるとあるが、これって、「どこのクラスにも入れることができるように書いている」から、できるのであってなんかトートロジーな説明ではないか。とも思える。
+
+- [［Python入門］多重継承とmixin (2/2)：Python入門 - ＠IT](https://www.atmarkit.co.jp/ait/articles/1909/03/news021_2.html)
+    - なるほど、mix-inしたクラスで、テンプレートメソッドという言葉を出している。が、これって abstraction  している部分と、implementation しているのを分けているともいえるので、同じことを別の名前で呼んでいる可能性もあるのでは。さしずめオーバーライドが、インプリメンテーションってか実装、か。ルー大柴っぽくカタカナ語が多いが、多分そういうことか。
+    - 自分で実装しろよ。というやり方もこれね。
+    - 最後まで読むのは会員登録がいるが、ここまで書いてあれば、なんとかなるか。
+    - ってか、Effective Pythonの「項目24:@classmethnodポリモルフィズムを使ってオブジェクトをジェネリックに構築する」p64-69 に収斂していくのでは、クラスで実装するパターンとして。
+
+
+### effctive python
+
+もう第二版が出ているので、初版の正誤表はなくなったのかもしれんが、索引の mix-in クラス　の　定義が、73-74は間違っていないか
+多分、74-75ではないのか。

@@ -109,9 +109,9 @@
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-07-31. Published at: 2020-07-10.">
+      <span title="Lastmod: 2020-08-02. Published at: 2020-07-10.">
         
-          Lastmod: 2020-07-31
+          Lastmod: 2020-08-02
         
       </span>
     </div>
@@ -655,6 +655,10 @@
 nonlocalで解決できる問題</li>
 </ul>
 <p>上記の説明をこの章で受けて、クロージャの挙動がよくわかったので、とても良かった。python ポケットリファレンスでは、端的に説明されていて、理解できていなかった。これは、ボケットリファレンスなので、この様な概念をキチンと説明するのは荷が重いのは理解するが、重要な概念だけに省くことはできなかったのだろうな。とも思う。プログラミング経験者が、pythonの教科書を購入するなら、ここは一つ内容を確認しておくのがいいのではないか。と私は思う。もちろん、もう理解しているから要らないと意見もあるかもしれない。</p>
+<dl>
+<dt>コーディングを支える技術</dt>
+<dd>別の本、「コーディングを支える技術」で、オブジェクト指向の話がでてくる。そこで、「11.2 変数と関数を束ねて模型を作る方法」p190がある。ある目的を達成するために、3つの方法がある。と書いている。(1)モジュール &mdash; Perlで使われている関数を束ねておくパッケージと、変数を束ねておくためのハッシュを結びつけておく方法(2) 関数も変数もハッシュに入れてしまう。JavaScriptなどが採用している方法(3)クロージャという主に関数型言語で使われている関数実行時の名前空間を変数をまとめるために使う方法です。と書いている。<!-- raw HTML omitted -->それぞれ詳しくは、本を参照して欲しいが、クロージャの説明として「11.5 方法3:クロージャ」P206があるが、実は、その前の「11.4 方法2:関数もハッシュに入れる」も読んでおかないと、fluent pythonで書いてあることに関係するからです。「ファーストクラス」「関数をハッシュに入れる」など。<!-- raw HTML omitted -->ここのクロージャの説明は、javascriptを例にしているので、pythonを学ぶ目的であれば、fluent pythonの方が良いだろう。「自由変数」というキーワードは「コーディングを支える技術」でも、でてきた。クロージャがなぜ「閉じる」という話になるのか。という概念になるのか。</dd>
+</dl>
 <h3 id="71-デコレータの基礎">7.1 デコレータの基礎</h3>
 <p>どういう動作をするか。についてのチュートリアル。</p>
 <h3 id="72-デコレータ実行のタイミング">7.2 デコレータ実行のタイミング</h3>
@@ -785,7 +789,7 @@ lru_cacheの概念を「メモ化」という概念で日本語として互換�
 <p>passengerのチェックをすることで、独立というか、別物にできる。ここは、また訪れて確認しないとわかった気にならないな。</p>
 <p><a href="http://pythontutor.com/live.html#code=%22%22%22%0A%3E%3E%3E%20basketball_team%20%3D%20%5B'Sue',%20'Tina',%20'Maya',%20'Diana',%20'Pat'%5D%0A%3E%3E%3E%20bus%20%3D%20TwilightBus%28basketball_team%29%0A%3E%3E%3E%20bus.drop%28'Tina'%29%0A%3E%3E%3E%20bus.drop%28'Pat'%29%0A%3E%3E%3E%20basketball_team%0A%5B'Sue',%20'Maya',%20'Diana'%5D%0A%22%22%22%0A%0A%23%20BEGIN%20TWILIGHT_BUS_CLASS%0Aclass%20TwilightBus%3A%0A%20%20%20%20%22%22%22A%20bus%20model%20that%20makes%20passengers%20vanish%22%22%22%0A%0A%20%20%20%20def%20__init__%28self,%20passengers%3DNone%29%3A%0A%20%20%20%20%20%20%20%20if%20passengers%20is%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.passengers%20%3D%20%5B%5D%20%20%23%20%3C1%3E%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.passengers%20%3D%20passengers%20%20%23%3C2%3E%0A%0A%20%20%20%20def%20pick%28self,%20name%29%3A%0A%20%20%20%20%20%20%20%20self.passengers.append%28name%29%0A%0A%20%20%20%20def%20drop%28self,%20name%29%3A%0A%20%20%20%20%20%20%20%20self.passengers.remove%28name%29%20%20%23%20%3C3%3E%0A%23%20END%20TWILIGHT_BUS_CLASS%0Abasketball_team%20%3D%20%5B'Sue',%20'Tina',%20'Maya',%20'Diana',%20'Pat'%5D%0Abus%20%3D%20TwilightBus%28basketball_team%29%0Abus1%20%3D%20TwilightBus%28basketball_team%29%0Abus2%20%3D%20TwilightBus%28basketball_team%29%0Abus1.drop%28%22Tina%22%29%0Abus2.drop%28%22Pat%22%29&amp;cumulative=false&amp;curInstr=26&amp;heapPrimitives=nevernest&amp;mode=display&amp;origin=opt-live.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false">http://pythontutor.com/live.html#code=%22%22%22%0A%3E%3E%3E%20basketball_team%20%3D%20%5B'Sue',%20'Tina',%20'Maya',%20'Diana',%20'Pat'%5D%0A%3E%3E%3E%20bus%20%3D%20TwilightBus%28basketball_team%29%0A%3E%3E%3E%20bus.drop%28'Tina'%29%0A%3E%3E%3E%20bus.drop%28'Pat'%29%0A%3E%3E%3E%20basketball_team%0A%5B'Sue',%20'Maya',%20'Diana'%5D%0A%22%22%22%0A%0A%23%20BEGIN%20TWILIGHT_BUS_CLASS%0Aclass%20TwilightBus%3A%0A%20%20%20%20%22%22%22A%20bus%20model%20that%20makes%20passengers%20vanish%22%22%22%0A%0A%20%20%20%20def%20__init__%28self,%20passengers%3DNone%29%3A%0A%20%20%20%20%20%20%20%20if%20passengers%20is%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.passengers%20%3D%20%5B%5D%20%20%23%20%3C1%3E%0A%20%20%20%20%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20self.passengers%20%3D%20passengers%20%20%23%3C2%3E%0A%0A%20%20%20%20def%20pick%28self,%20name%29%3A%0A%20%20%20%20%20%20%20%20self.passengers.append%28name%29%0A%0A%20%20%20%20def%20drop%28self,%20name%29%3A%0A%20%20%20%20%20%20%20%20self.passengers.remove%28name%29%20%20%23%20%3C3%3E%0A%23%20END%20TWILIGHT_BUS_CLASS%0Abasketball_team%20%3D%20%5B'Sue',%20'Tina',%20'Maya',%20'Diana',%20'Pat'%5D%0Abus%20%3D%20TwilightBus%28basketball_team%29%0Abus1%20%3D%20TwilightBus%28basketball_team%29%0Abus2%20%3D%20TwilightBus%28basketball_team%29%0Abus1.drop%28%22Tina%22%29%0Abus2.drop%28%22Pat%22%29&amp;cumulative=false&amp;curInstr=26&amp;heapPrimitives=nevernest&amp;mode=display&amp;origin=opt-live.js&amp;py=3&amp;rawInputLstJSON=%5B%5D&amp;textReferences=false</a></p>
 <p>確保したオブジェクトを使いまわすのは、C言語の、call by referenceと同じように思ってしまうが、本章のSoapboxの部分もあるので、また読み直して理解に努めたい。</p>
-<p>なお、前節 「8.4.1 可変な引数を使うプログラムを頑強に」と異なるのは、可変な引数の内容が、[]な時と、そうでない時に、同じオブジェクトを指していないことが確認できる。前者と、初期値を[]かどうかで振り分けている本節のプログラムの差については、理解した気がするが。</p>
+<p>なお、前節 「8.4.1 可変な引数を使うプログラムを頑強に」と異なるのは、可変な引数の内容が、[]な時と、そうでない時に、同じオブジェクトを指していないことが確認できる。前者と、初期値を[]かどうかで振り分けている本節のプログラムの差については、理解した気がするが。 see also 本章のSoapbox</p>
 <h3 id="85-delとガベージコレクション">8.5 delとガベージコレクション</h3>
 <p>delは、名前を削除し、ガベージコレクションは、オブジェクトを削除する。CPythonのガベージコレクションは、reference counterを使っているとのこと。ガベージコレクションはそれだけで、一つの学ぶべき分野であるが、fluent python p245 ではreference cunterの説明がなされている。</p>
 <p>weakref.finalize ってので、オブジェクトが削除されたときに実行されるコールバックを設定できることを知る。</p>
@@ -836,6 +840,42 @@ lru_cacheの概念を「メモ化」という概念で日本語として互換�
 </blockquote>
 <p>参照のコピーといっても、shallow copyなので、同じオブジェクトを参照しているのではないのか。そして「再バインド」という言葉が出てくるが、何となくの意味でなく、pythonにおける変数の再バインドとは、何か。再代入のことなのか?</p>
 <p>という疑問があるので、やっばり理解しているとは思えない。また、わかったら追記する。</p>
+<dl>
+<dt>2020/08/01</dt>
+<dd>idは変わらない。というのは、下記のようだ。</dd>
+</dl>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;aaa&#34;</span><span class="p">,</span><span class="s2">&#34;bbb&#34;</span><span class="p">,</span><span class="s2">&#34;ccc&#34;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">fna</span><span class="p">(</span><span class="n">arga</span><span class="p">):</span>
+<span class="o">...</span>     <span class="n">b</span> <span class="o">=</span> <span class="n">arga</span>
+<span class="o">...</span>     <span class="n">b</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;ddd&#34;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="o">...</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">fnb</span><span class="p">(</span><span class="n">argb</span><span class="p">):</span>
+<span class="o">...</span>     <span class="n">c</span> <span class="o">=</span> <span class="n">argb</span>
+<span class="o">...</span>     <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&#34;eee&#34;</span><span class="p">)</span>
+<span class="o">...</span>     <span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="o">...</span> 
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;bbb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fna</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;bbb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">,</span> <span class="s1">&#39;ddd&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fnb</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;bbb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">,</span> <span class="s1">&#39;ddd&#39;</span><span class="p">,</span> <span class="s1">&#39;eee&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;bbb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">,</span> <span class="s1">&#39;ddd&#39;</span><span class="p">,</span> <span class="s1">&#39;eee&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="mi">140204036553472</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fna</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;bbb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">,</span> <span class="s1">&#39;ddd&#39;</span><span class="p">,</span> <span class="s1">&#39;eee&#39;</span><span class="p">,</span> <span class="s1">&#39;ddd&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="mi">140204036553472</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">fnb</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;bbb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">,</span> <span class="s1">&#39;ddd&#39;</span><span class="p">,</span> <span class="s1">&#39;eee&#39;</span><span class="p">,</span> <span class="s1">&#39;ddd&#39;</span><span class="p">,</span> <span class="s1">&#39;eee&#39;</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="mi">140204036553472</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="p">[</span><span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;bbb&#39;</span><span class="p">,</span> <span class="s1">&#39;ccc&#39;</span><span class="p">,</span> <span class="s1">&#39;ddd&#39;</span><span class="p">,</span> <span class="s1">&#39;eee&#39;</span><span class="p">,</span> <span class="s1">&#39;ddd&#39;</span><span class="p">,</span> <span class="s1">&#39;eee&#39;</span><span class="p">]</span>
+</code></pre></div><p>オブジェクトのIDは不変でも、内容は変わっていくってことは、こういうことか。</p>
 <h2 id="9章-pythonic-なオブジェクト">9章 Pythonic なオブジェクト</h2>
 <p>ここでは、ユーザ定義型を作るテクニックについて学ぶようだ。p259</p>
 <p>この章で学ぶのは、</p>
@@ -936,7 +976,136 @@ lru_cacheの概念を「メモ化」という概念で日本語として互換�
 <h3 id="910-本章のまとめ">9.10 本章のまとめ</h3>
 <h3 id="911-参考文献">9.11 参考文献</h3>
 <h3 id="soapbox-1">Soapbox</h3>
+<h2 id="10章-シーケンスをばらしてハッシュしてスライスする">10章 シーケンスをばらして、ハッシュして、スライスする</h2>
+<p>ダックタイピングについてより考察を深める。一章で出てきた、 __len__、 __getitem__ をより詳細などなど。「非形式なインターフェースとしてのプロトコル」という話題が出てくるようだが、概念と具象をつなげる部分に興味がある。</p>
+<p>コラムの「多次元ベクトルアプリケーション」は良い。意欲が出たが、一気に全部はできないので、まずは本書を一通りやってから。</p>
+<h3 id="101-ユーザ定義のシーケンス型vector">10.1 ユーザ定義のシーケンス型(Vector)</h3>
+<p>継承でなく、compositionで実装するのはなぜか。</p>
+<h3 id="102-vector2d互換vectorテイク1">10.2 Vector2d互換(Vectorテイク1)</h3>
+<p>例10-1で、コンストラクタがこっちがベストプラクティスってことで。</p>
+<p>質問がでていた、reprとstrの違いについては、p291のサソリのマーク部分で、その答えがある。</p>
+<ul>
+<li>例10-2
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/10-seq-hacking/vector_v1.py">example-code/vector_v1.py at master · fluentpython/example-code</a></li>
+<li>上記のプログラムの説明は、p291からp292 にかけて、説明がある。</li>
+<li>repr()の実装、__repr__をプログラミングするにあたっての注意点は、p293にある。</li>
+</ul>
+</li>
+</ul>
+<h3 id="103-プロトコルとダックタイピング">10.3 プロトコルとダックタイピング</h3>
+<p>ずっと気になっていた、プロトコルの説明が、本節である。fluentpythonで述べられている、プロトコルの定義って、他でも使われているのか?</p>
+<blockquote>
+<p>オブジェクト指向プログラミングにおけるプロトコルは非形式的なインターフェースで、コードではなくドキュメントでのみ定義されるものです。</p>
+</blockquote>
+<p>という、文章は次の行から具体例を示しているが、この様な形式でコードを実装せよ。という例が書いてあり、「非形式的なインターフェース」って何だ?と、「コードでなくドキュメント」ってのは何を指しているのか、私に取っては自明でないが、読み進めていくと理解できるといいな。</p>
+<p>他のOOPをする言語だと、確かにシーケンス型を継承しないと、そのような動作にならない。という前提で、そのようなプログラミング言語に対して、pythonはダックタイピングで、ダンダーメソッドを整備すれば、同じモノとして見なす。という意味なんだろう。と理解しておく。</p>
+<p>そして、fluentpythonにおいてダックタイピングの定義っぽいものは、p294にある。</p>
+<h3 id="104-スライス可能てシーケンスvectorテイク2">10.4 スライス可能てシーケンス(Vectorテイク2)</h3>
+<p>シーケンスプロトコルの処理を作るのに、これから記述していく。</p>
+<h4 id="1041-スライスの仕組み">10.4.1 スライスの仕組み</h4>
+<ul>
+<li><a href="https://docs.python.org/ja/3/reference/datamodel.html?highlight=slice%20indices#slice.indices">3. データモデル — Python 3.8.5 ドキュメント</a>
+<ul>
+<li>slice.indices についてのドキュメント</li>
+<li>スライス(slice)オブジェクト　の説明</li>
+<li>class slice に関して
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/functions.html#slice">組み込み関数 — Python 3.8.5 ドキュメント</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="1042-スライス対応版の__getitem__">10.4.2 スライス対応版の__getitem__</h4>
+<ul>
+<li>
+<p>例10-6 (vector_v2.py)</p>
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/10-seq-hacking/vector_v2.py">example-code/vector_v2.py at master · fluentpython/example-code</a></li>
+</ul>
+</li>
+<li>
+<p>isinstanceで、何のオブジェクトかを判定して、どうしたらいいか。例示する。p298</p>
+</li>
+<li>
+<p>何の例外を上げるか。どういうときに?</p>
+</li>
+</ul>
+<h3 id="105-動的な属性アクセスvectorテイク3">10.5 動的な属性アクセス(Vectorテイク3)</h3>
+<p>__getattr__ の紹介と使い方。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/functions.html?highlight=getattr#getattr">getattr 組み込み関数 — Python 3.8.5 ドキュメント</a></li>
+</ul>
+<p>p299 ここで、求める属性がどういう風に検索されているか。を書いてくれている。</p>
+<ol>
+<li>インスタンスに名前があるか</li>
+<li>クラスの中を検索</li>
+<li>__getattr__</li>
+</ol>
+<p>で探すとあり、もうちょっと詳細に書いてある。</p>
+<ul>
+<li>例10-6
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/10-seq-hacking/vector_v3.py">example-code/vector_v3.py at master · fluentpython/example-code</a>
+<ul>
+<li>p300から302にかけて説明あり。</li>
+<li>superがサラッとでてきているが、詳細は12.2節でやるとのこと。</li>
+<li>__slots__ を使う誘惑に負けるな。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="106-ハッシュとより高速なvectorテイク4">10.6 ハッシュとより高速な==(Vectorテイク4)</h3>
+<p>__hash__ と __eq__ の実装。そして、functools.reduceを使う。 lambda を使って、5!(5の階乗)を計算する方法については、p303にあり、reduceの基本的な方法を学ぶことができるが、次ページのp304にて、xorを取る3つの方法が例示されている。特に、(3)は、作者のお気に入りであるが、これは標準で付いてくるライブラリを知らないと、ついつい知っている(1)の方法に頼りがちなので、ここもfluent pythonを読んでて良かったなと。</p>
+<p>__eq__ と、 __hash__ は、近接さておくというのは、たしかに。(理由は、p305を参照せよ)</p>
+<p>p305は、map - reduce 演算の説明、この概念を知らない人には、必要な説明だろう。また、p306-307にかけて、zipについて紹介している。map - reduce系の処理をするなら、とても使い勝手ので、自分の道具箱に入れておけというのは、よくわかる。python ポケットリファレンスだとp94です。</p>
+<p>allの使い方も例示があり、この手の書き方に慣れていないなら、参考になる部分だと思う。</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/functions.html?highlight=enumerate#enumerate">enumerate 組み込み関数 — Python 3.8.5 ドキュメント</a></li>
+<li><a href="https://docs.python.org/ja/3/library/functions.html?highlight=zip#zip">zip</a></li>
+</ul>
+<h3 id="107-フォーマットvectorテイク5">10.7 フォーマット(Vectorテイク5)</h3>
+<p>出力フォーマットを極座標系から、球面座標系へ変換するにあたって、コードを書き換える。既存の書式を書き換えないで拡張する方法について。</p>
+<ul>
+<li>例10-16 p309
+<ul>
+<li><a href="https://github.com/fluentpython/example-code/blob/master/10-seq-hacking/vector_v5.py">example-code/vector_v5.py at master · fluentpython/example-code</a></li>
+<li>p309から、p315までコードの掲示と説明</li>
+</ul>
+</li>
+</ul>
+<h3 id="108-本章のまとめ">10.8 本章のまとめ</h3>
+<p>やった内容の振り返り</p>
+<h3 id="109-参考文献">10.9 参考文献</h3>
+<p>ここで、最初に読んで良かったとおもうのは、p317の下記です。</p>
+<blockquote>
+<p>とても使い勝手のよい reduceは、高階関数で、これをfold, accumulate, aggregate, compress, inject という名でも呼ばれています。詳細は、英語版Wikipediaの「Fold(high-order fucntion)」を参照してください。</p>
+</blockquote>
+<p>でした。同じような概念を別の名前で呼んでいるなと、薄々は気がついていましたが、覚える概念が減ってありがたい。</p>
+<h3 id="soapbox-2">Soapbox</h3>
+<p>ここの章のSoapboxは、私に取って収穫が多い。</p>
+<h4 id="非形式的なインターフェースとしてのプロトコル">非形式的なインターフェースとしてのプロトコル</h4>
+<p>ここに来て、ようやく「非形式的なインターフェースとしてのプロトコル」という内容を補完する記述がでてくる。まずは読み進めてみないとわからない評価はできないな。P317</p>
+<p>プロトコルとインターフェースは、11章の主題とのことです。11章の冒頭でも書かれるでしょうけど。</p>
+<h4 id="ダックタイピングの起源">ダックタイピングの起源</h4>
+<p>確かに本筋でないが、書いておきたいのはわかる。</p>
+<h4 id="ユーザビリティを向上した安全な-__format__">ユーザビリティを向上した安全な __format__</h4>
+<p>ユーザの要求と、困りそうなことを考えてのコードを書くには。</p>
+<h4 id="pythonicなsumの探求">PythonicなSumの探求</h4>
+<p>著者による、Pythonicとは何かについての意見の開陳と、pyhthonにいる自分の流儀が良いという流派の話と、pyhonicなコードとはいう話は直接は関係なくてもジワジワ効いてくる話だと思う。p319-p321</p>
 <h2 id="仮置場">仮置場</h2>
+<h3 id="プロトコル">プロトコル</h3>
+<p>fluent pythonを読んでいて、用語集に「プロトコル」がないのが気になっている。ガンガン用語として使っているのに、はっきりと説明せずに外堀を埋める形で、定義しようとしている感じです。</p>
+<p>fluent python P317の「非形式的なインターフェースとしてのプロトコル」という文章があった。ようやく著者の意図が説明されてすっきり、やっぱり用語集に入れておく価値があると思うな。本に書き込むか、私的用語集にぶっこんでおくのがいいんだろうな。</p>
+<p>pythonと、「トレイト」について調べていると、たまたま見つかった文書 <a href="https://qiita.com/t2y/items/434854fab16159a7c0f7">[翻訳] Python プログラマーのための Rust 入門 - Qiita</a> があって、「トレイト対プロトコル」という見出しがある。</p>
+<blockquote>
+<p>Python では、特殊メソッドを実装することでクラスは特定の振る舞いを選択できます。これは通常 &ldquo;プロトコルに従う&rdquo; と呼ばれます。</p>
+</blockquote>
+<p>この表現は、現段階でfluent pythonを読み進めていてしっくりとくる表現です。特殊メソッドは、ダンダともいうので、同じことを別の名前で表していることがあるので、「本を読む本」のいう「シントピカル読書」が有効だというのも納得です。多分簡単過ぎる表現にすると、間違った理解に至るのを嫌っているから、こういうやり方なのかも知れない。</p>
+<p>こうやって自分で、調べていくと忘れないからいいけど。</p>
+<p>トレイトに関しては、「コーディングを支える技術」を参照してほしい。ScalaやSqueakの例があるとのこと。上記linkで Rust も。</p>
 <h3 id="ジェネリック">ジェネリック</h3>
 <p>言葉としてはよく聞くが、具体的な定義なしにフワッと使っていないか?読み落としているだけかもしれないが。動的言語なので、どのクラスに入っても有効に使える関数として書くという意味であれば、下記のmixinに近接した概念になるのではないか。下のmix-inも参照せよ。</p>
 <h3 id="mix-in">mix-in</h3>
@@ -961,6 +1130,10 @@ lru_cacheの概念を「メモ化」という概念で日本語として互換�
 </ul>
 </li>
 </ul>
+<dl>
+<dt>「コーディングを支える技術」</dt>
+<dd>「12.3 多重継承の問題点」- 解決策3:処理を混ぜ込む(Mix-in) pythonの場合 p230 言語的なサポートを受ける、受けない。慣習としての話がある。Pythonは多重継承できるので、「コーディングを支える技術」の 12.2 多重継承 「実装の再利用に便利な多重継承」p219を挙げておく。<!-- raw HTML omitted -->「コーディングを支える技術」12.2多重継承の問題点&mdash;またしても衝突! 「提供するメソッドと要求するメソッド」p233において、書いてある問題点として、 <strong>Mix-inをする場合に、単体ではインスタンス化してはいけないクラスがあるが、どういう状態になればインスタンスを作っていいか判別する仕組み言語上のサポートがない</strong> というものでした。</dd>
+</dl>
 <h3 id="effctive-python">effctive python</h3>
 <p>もう第二版が出ているので、初版の正誤表はなくなったのかもしれんが、索引の mix-in クラス　の　定義が、73-74は間違っていないか
 多分、74-75ではないのか。</p>
@@ -1134,8 +1307,23 @@ lru_cacheの概念を「メモ化」という概念で日本語として互換�
         <li><a href="#soapbox-1">Soapbox</a></li>
       </ul>
     </li>
+    <li><a href="#10章-シーケンスをばらしてハッシュしてスライスする">10章 シーケンスをばらして、ハッシュして、スライスする</a>
+      <ul>
+        <li><a href="#101-ユーザ定義のシーケンス型vector">10.1 ユーザ定義のシーケンス型(Vector)</a></li>
+        <li><a href="#102-vector2d互換vectorテイク1">10.2 Vector2d互換(Vectorテイク1)</a></li>
+        <li><a href="#103-プロトコルとダックタイピング">10.3 プロトコルとダックタイピング</a></li>
+        <li><a href="#104-スライス可能てシーケンスvectorテイク2">10.4 スライス可能てシーケンス(Vectorテイク2)</a></li>
+        <li><a href="#105-動的な属性アクセスvectorテイク3">10.5 動的な属性アクセス(Vectorテイク3)</a></li>
+        <li><a href="#106-ハッシュとより高速なvectorテイク4">10.6 ハッシュとより高速な==(Vectorテイク4)</a></li>
+        <li><a href="#107-フォーマットvectorテイク5">10.7 フォーマット(Vectorテイク5)</a></li>
+        <li><a href="#108-本章のまとめ">10.8 本章のまとめ</a></li>
+        <li><a href="#109-参考文献">10.9 参考文献</a></li>
+        <li><a href="#soapbox-2">Soapbox</a></li>
+      </ul>
+    </li>
     <li><a href="#仮置場">仮置場</a>
       <ul>
+        <li><a href="#プロトコル">プロトコル</a></li>
         <li><a href="#ジェネリック">ジェネリック</a></li>
         <li><a href="#mix-in">mix-in</a></li>
         <li><a href="#effctive-python">effctive python</a></li>

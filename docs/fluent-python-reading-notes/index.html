@@ -109,9 +109,9 @@
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-08-18. Published at: 2020-07-10.">
+      <span title="Lastmod: 2020-08-19. Published at: 2020-07-10.">
         
-          Lastmod: 2020-08-18
+          Lastmod: 2020-08-19
         
       </span>
     </div>
@@ -1568,7 +1568,119 @@ pythonを書く上で役立つし、自分でどういう時に、コンテキ�
 </ul>
 <h3 id="1611-参考文献">16.11 参考文献</h3>
 <p>p526の下から3行めから、p527にかけて、async defの話をしている。async defで定義された、処理の中では、yield/yield fromは使えないということなので、概念というか機能としては重要だが、pythonのコルーチンの扱いは、この本がかかれた後も変化しているだろうから、キャッチアップが必要そうです。</p>
+<p>ってか。p350で、「最新ニュース」として、PEP 492 の話題がでてる。ってことで、asyncioについての記述は、翻訳者さんと監修者さんがどれだけフォローしているのか確認しつつpython 3.5関係のupdateを見ないとあかんのか&hellip;</p>
 <h2 id="17章-futuresを使った並行処理">17章 futuresを使った並行処理</h2>
+<p>2020/08/19 にやる Fluent Python読書会ための基礎資料</p>
+<p>この冒頭の引用は、なんの話をしているのか。</p>
+<p>シンプルなパターンだけで済むのか。マルチスレッド・デザインパターンは考慮に入っているのかとか、疑問があるが、まずは読み進めて著者の主張を聞こう。</p>
+<ul>
+<li>concurrent.futures ライブラリ</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">用語</th>
+<th align="left">意味</th>
+<th align="center">ソース</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">concurrent/並行</td>
+<td align="left">処理のはじめから終わりまでの時間が複数のタスクで重なっているときに使われます。たとえば、シングルコア上で動作しているマルチタスクOSのように、複数のプロセス自体は同時に動作していていても、ある一瞬では1つしか動作していません。</td>
+<td align="center">Fluent Python p532の脚注†2</td>
+</tr>
+<tr>
+<td align="left">並行処理(concurrency)とは、</td>
+<td align="left">たくさんのことを一度に「対処」することです。</td>
+<td align="center">Fluent Python P545</td>
+</tr>
+<tr>
+<td align="left">parallel/並列</td>
+<td align="left">たとえば複数のCPUで複数のタスクが同時点に動作しているときに使われます。</td>
+<td align="center">Fluent Python p532の脚注†2</td>
+</tr>
+<tr>
+<td align="left">並列処理(parallelism)とは、</td>
+<td align="left">たくさんのことを一度に「処理」することです。</td>
+<td align="center">Fluent Python P545</td>
+</tr>
+</tbody>
+</table>
+<p>Fluent Pythonでは、18章 P565の定義を使うようだ。並行と並列って、人によって使い方が違うので、適当に読んでいると、さっぱり分からなくなってしまいがち。</p>
+<p>ちなみに、「実践Python3」には「4章 高レベルな並行処理」がある。</p>
+<h3 id="171-3種類のウェブダウンロードスクリプト">17.1 3種類のウェブダウンロードスクリプト</h3>
+<p><a href="https://www.youtube.com/watch?v=A9e9Cy1UkME">https://www.youtube.com/watch?v=A9e9Cy1UkME</a></p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/A9e9Cy1UkME" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>これを見ておくと、本書の議論を具体的にわかる。一番いいのは実際に動かすことだが、DDoS攻撃をしたくないという人には有益だろう。</p>
+<h4 id="1711-逐次型ダウンロードスクリプト">17.1.1 逐次型ダウンロードスクリプト</h4>
+<p>pythonの標準 urllib系は、人によって何を使うのかの意見が異なっている。Fluent Pythonにおいては、requestsを推しているようだ。ちなみにpython3でもurllibの使用例はある。python2での互換などを考える人は調べるか、書き直すかなどの選択があるだろう。</p>
+<p>例17-2</p>
+<h4 id="1712-concurrentfutures-を使ったダウンロードスクリプト">17.1.2 concurrent.futures を使ったダウンロードスクリプト</h4>
+<p>この例はスレッドプールを用いている</p>
+<h4 id="1713-futuresはどこ">17.1.3 futuresはどこ</h4>
+<p>futures の意味する所を書いている。これ重要 p537</p>
+<h3 id="172-ブロッキングioとgil">17.2 ブロッキングI/OとGIL</h3>
+<blockquote>
+<p>内部的にスレッドセーフでない、CPythonインタプリタには、GIL(Global Interpreter Lock)が用意されている。</p>
+</blockquote>
+<p>上記の引用は、Pythonの批判に上がるが、それについての解説。</p>
+<p>まずGILとはの説明</p>
+<table>
+<thead>
+<tr>
+<th align="left">処理系名</th>
+<th align="center">GILの有無</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">CPython</td>
+<td align="center">あり</td>
+</tr>
+<tr>
+<td align="left">PyPy</td>
+<td align="center">あり</td>
+</tr>
+<tr>
+<td align="left">Jython</td>
+<td align="center">なし</td>
+</tr>
+<tr>
+<td align="left">IronPython</td>
+<td align="center">なし</td>
+</tr>
+</tbody>
+</table>
+<p>GILがあったとしても、Pythonの実装から下のLayerにいけば、1つのPythonを実行しているプロセスが複数のCoreを活用できないとしても、C言語などが扱うライブラリの世界においては、GILはないのでCPU Coreを活用できる。</p>
+<p>I/O待ちで、OSに処理が渡っている時間は、Pythonの管理下ではなく、「そのOS」の管理下にあるから。<strong>ここ重要</strong></p>
+<p>処理をぶん投げて、結果を待つスタイルのプログラムを上手く書くというのが、 <ruby>
+    流暢なPython <rp> (</rp><rt>Fluent Ptyhon</rt><rp>) </rp>
+</ruby>
+ なコードの書き方だ。Python風だ。ということだと思う。</p>
+<h3 id="173-concurrentfuturesによるプロセスの機動">17.3 concurrent.futuresによるプロセスの機動</h3>
+<p>coreが4つの場合、workerを1から4に変化させて、処理速度がどのように変わるか。P543</p>
+<p>CPUを使わずに、IO待ちになる処理</p>
+<h3 id="174-executormapの実験">17.4 Executor.mapの実験</h3>
+<p>例17-6 の例いいな。このログ表示は「このプログラム」の条件でわかりやすい。P544-547</p>
+<h3 id="175-進行状況表示とエラー処理を加えたダウンロード">17.5 進行状況表示とエラー処理を加えたダウンロード</h3>
+<p>実世界のプログラミングでは、人間へのフィードバックという大事な「進行状況表示」と不測の事態は起こるので、「エラー処理」は必須です。</p>
+<p>TQDMとかのライブラリが充実しているのも、Pythonのいい所だ。</p>
+<h4 id="1751-flag2のエラー処理">17.5.1 flag2のエラー処理</h4>
+<h4 id="1752-futuresas_completedの利用">17.5.2 futures.as_completedの利用</h4>
+<h4 id="1753-threadingあるいはmultiprocessingによる方法">17.5.3 threadingあるいはmultiprocessingによる方法</h4>
+<p>ここに持ってきているのは、これまで議論してきた内容を先につたえたいのと、GILが問題になるという話、歴史的経緯から、threadからthreadingへの移行があったからか。</p>
+<p>Fluent Pythonとしては、multiprocess の話は概略にしているが、最初はガリガリと書いていたが「この分量」であるし、並列処理については、それだけでやるべき論点が多すぎるのだろう。</p>
+<p>基礎は教えたから、自分で調べろということのようだ。</p>
+<h3 id="176-本章のまとめ">17.6 本章のまとめ</h3>
+<h3 id="177-参考文献">17.7 参考文献</h3>
+<h3 id="soapbox-4">Soapbox</h3>
+<p>ここも、読んでいて面白い。他の言語を比較するなら、読んでおけということか。</p>
+<p>プログラムか単純にかくために、抽象化されたworkerたちを動かしたい。ガチなスレッドプログラミングはできる人に任せたいというのが、動機というのは、理解できる。全部を一つの言語でカバーはできないのだから。</p>
 <h2 id="18章-asyncioによる並行処理">18章 asyncioによる並行処理</h2>
 <h2 id="19章-動的属性とプロパティ">19章 動的属性とプロパティ</h2>
 <h2 id="20章-属性ディスクリプタ">20章 属性ディスクリプタ</h2>
@@ -1849,7 +1961,18 @@ pythonを書く上で役立つし、自分でどういう時に、コンテキ�
         <li><a href="#1611-参考文献">16.11 参考文献</a></li>
       </ul>
     </li>
-    <li><a href="#17章-futuresを使った並行処理">17章 futuresを使った並行処理</a></li>
+    <li><a href="#17章-futuresを使った並行処理">17章 futuresを使った並行処理</a>
+      <ul>
+        <li><a href="#171-3種類のウェブダウンロードスクリプト">17.1 3種類のウェブダウンロードスクリプト</a></li>
+        <li><a href="#172-ブロッキングioとgil">17.2 ブロッキングI/OとGIL</a></li>
+        <li><a href="#173-concurrentfuturesによるプロセスの機動">17.3 concurrent.futuresによるプロセスの機動</a></li>
+        <li><a href="#174-executormapの実験">17.4 Executor.mapの実験</a></li>
+        <li><a href="#175-進行状況表示とエラー処理を加えたダウンロード">17.5 進行状況表示とエラー処理を加えたダウンロード</a></li>
+        <li><a href="#176-本章のまとめ">17.6 本章のまとめ</a></li>
+        <li><a href="#177-参考文献">17.7 参考文献</a></li>
+        <li><a href="#soapbox-4">Soapbox</a></li>
+      </ul>
+    </li>
     <li><a href="#18章-asyncioによる並行処理">18章 asyncioによる並行処理</a></li>
     <li><a href="#19章-動的属性とプロパティ">19章 動的属性とプロパティ</a></li>
     <li><a href="#20章-属性ディスクリプタ">20章 属性ディスクリプタ</a></li>

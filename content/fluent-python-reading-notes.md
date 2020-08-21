@@ -1914,6 +1914,79 @@ Fluent Pythonとしては、multiprocess の話は概略にしているが、最
 
 ## 18章 asyncioによる並行処理 ##
 
+- pythonの公式ドキュメントによるasyncio
+    - [コルーチンと Task — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/asyncio-task.html)
+        - yield キーワードを使う書き方は、python 3.10で廃止か。see [Generator-based-corutine](https://docs.python.org/ja/3/library/asyncio-task.html#asyncio-generator-based-coro)
+
+
+
+
+- [python-trio/trio: Trio – a friendly Python library for async concurrency and I/O](https://github.com/python-trio/trio)
+    - 標準添付以外だと、この辺が熱そう? curio をrespect しているとのこと。
+
+
+### 18.1 スレッドとコルーチン ###
+
+Never use time.sleep() in asyncio coroutine. everything will be stop.
+
+Use `yield from asyncio.sleep(DELAY)`
+
+
+#### 18.1.1 ノンブロッキング型の asyncio.Future ####
+
+#### 18.1.2 Future、Task、コルーチンからのyield ####
+
+### asyncioおよびaiohttpによるダウンロード ###
+
+- [example-code/spinner_asyncio.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/18-asyncio/spinner_asyncio.py)
+    - yield/yield fromを使ったバージョン
+
+- [example-code/spinner_await.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/18-asyncio/spinner_await.py)
+    - 現行のasync/awaitを使ったバージョン
+
+- [example-code/spinner_curio.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/18-asyncio/spinner_curio.py)
+    - curioを使ったバージョン
+
+- [example-code/spinner_thread.py at master · fluentpython/example-code](https://github.com/fluentpython/example-code/blob/master/18-asyncio/spinner_thread.py)
+    - thread poolを使ったバージョン
+    - [dabeaz/curio: Curio - &quot;It's the Sauce!&quot;](https://github.com/dabeaz/curio)
+        - [pypi curio at DuckDuckGo](https://duckduckgo.com/?q=pypi+curio&atb=v229-7gt&ia=web&iai=r1-1&page=1&sexp=%7B%22v7exp%22%3A%22a%22%2C%22sltexp%22%3A%22b%22%2C%22biaexp%22%3A%22a%22%2C%22wiadrk%22%3A%22b%22%2C%22langexp%22%3A%22b%22%2C%22liapm%22%3A%22b%22%7D)
+
+### 18.3 ブロッキング型の呼び出しをぐるぐるまわす ###
+
+- [aiofiles · PyPI](https://pypi.org/project/aiofiles/)
+
+
+### 18.4 asyncio ダウンローダスクリプトの拡張 ###
+
+#### asyncio.as\_completedの使い方 ####
+
+### Exeecutor を使ったイベントループのブロッキングの回避方法 ###
+
+ここのテクニックは、他でも有効な場面はいつか。
+
+### 18.5 コールバックからFutureとコルーチンへ ###
+
+コールバック地獄と解決方法
+
+#### 18.5.1 1回のダウンロードにつき複数回のリクエスト ####
+
+### 18.6 asyncioサーバを書く ###
+
+#### 18.6.1 asycio TCPサーバ ####
+
+#### 18.6.2 aiohttpウェブサーバ ####
+
+#### 18.6.3 並行性を高める賢いクライアント ####
+
+### 18.7 本章のまとめ ###
+
+### 18.8 参考文献 ###
+
+### Soapbox ###
+
+とは、いいながら、色々とasyncなライブラリが作られていて、どれを使うのかを試されている。
+
 ## 19章 動的属性とプロパティ ##
 
 ## 20章 属性ディスクリプタ ##

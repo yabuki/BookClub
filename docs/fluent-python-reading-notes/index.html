@@ -109,9 +109,9 @@
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-08-19. Published at: 2020-07-10.">
+      <span title="Lastmod: 2020-08-21. Published at: 2020-07-10.">
         
-          Lastmod: 2020-08-19
+          Lastmod: 2020-08-21
         
       </span>
     </div>
@@ -1682,6 +1682,80 @@ pythonを書く上で役立つし、自分でどういう時に、コンテキ�
 <p>ここも、読んでいて面白い。他の言語を比較するなら、読んでおけということか。</p>
 <p>プログラムか単純にかくために、抽象化されたworkerたちを動かしたい。ガチなスレッドプログラミングはできる人に任せたいというのが、動機というのは、理解できる。全部を一つの言語でカバーはできないのだから。</p>
 <h2 id="18章-asyncioによる並行処理">18章 asyncioによる並行処理</h2>
+<ul>
+<li>
+<p>pythonの公式ドキュメントによるasyncio</p>
+<ul>
+<li><a href="https://docs.python.org/ja/3/library/asyncio-task.html">コルーチンと Task — Python 3.8.5 ドキュメント</a>
+<ul>
+<li>yield キーワードを使う書き方は、python 3.10で廃止か。see <a href="https://docs.python.org/ja/3/library/asyncio-task.html#asyncio-generator-based-coro">Generator-based-corutine</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/python-trio/trio">python-trio/trio: Trio – a friendly Python library for async concurrency and I/O</a></p>
+<ul>
+<li>標準添付以外だと、この辺が熱そう? curio をrespect しているとのこと。</li>
+</ul>
+</li>
+</ul>
+<h3 id="181-スレッドとコルーチン">18.1 スレッドとコルーチン</h3>
+<p>Never use time.sleep() in asyncio coroutine. everything will be stop.</p>
+<p>Use <code>yield from asyncio.sleep(DELAY)</code></p>
+<h4 id="1811-ノンブロッキング型の-asynciofuture">18.1.1 ノンブロッキング型の asyncio.Future</h4>
+<h4 id="1812-futuretaskコルーチンからのyield">18.1.2 Future、Task、コルーチンからのyield</h4>
+<h3 id="asyncioおよびaiohttpによるダウンロード">asyncioおよびaiohttpによるダウンロード</h3>
+<ul>
+<li>
+<p><a href="https://github.com/fluentpython/example-code/blob/master/18-asyncio/spinner_asyncio.py">example-code/spinner_asyncio.py at master · fluentpython/example-code</a></p>
+<ul>
+<li>yield/yield fromを使ったバージョン</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/fluentpython/example-code/blob/master/18-asyncio/spinner_await.py">example-code/spinner_await.py at master · fluentpython/example-code</a></p>
+<ul>
+<li>現行のasync/awaitを使ったバージョン</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/fluentpython/example-code/blob/master/18-asyncio/spinner_curio.py">example-code/spinner_curio.py at master · fluentpython/example-code</a></p>
+<ul>
+<li>curioを使ったバージョン</li>
+</ul>
+</li>
+<li>
+<p><a href="https://github.com/fluentpython/example-code/blob/master/18-asyncio/spinner_thread.py">example-code/spinner_thread.py at master · fluentpython/example-code</a></p>
+<ul>
+<li>thread poolを使ったバージョン</li>
+<li><a href="https://github.com/dabeaz/curio">dabeaz/curio: Curio - &quot;It&rsquo;s the Sauce!&quot;</a>
+<ul>
+<li><a href="https://duckduckgo.com/?q=pypi+curio&amp;atb=v229-7gt&amp;ia=web&amp;iai=r1-1&amp;page=1&amp;sexp=%7B%22v7exp%22%3A%22a%22%2C%22sltexp%22%3A%22b%22%2C%22biaexp%22%3A%22a%22%2C%22wiadrk%22%3A%22b%22%2C%22langexp%22%3A%22b%22%2C%22liapm%22%3A%22b%22%7D">pypi curio at DuckDuckGo</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="183-ブロッキング型の呼び出しをぐるぐるまわす">18.3 ブロッキング型の呼び出しをぐるぐるまわす</h3>
+<ul>
+<li><a href="https://pypi.org/project/aiofiles/">aiofiles · PyPI</a></li>
+</ul>
+<h3 id="184-asyncio-ダウンローダスクリプトの拡張">18.4 asyncio ダウンローダスクリプトの拡張</h3>
+<h4 id="asyncioas_completedの使い方">asyncio.as_completedの使い方</h4>
+<h3 id="exeecutor-を使ったイベントループのブロッキングの回避方法">Exeecutor を使ったイベントループのブロッキングの回避方法</h3>
+<p>ここのテクニックは、他でも有効な場面はいつか。</p>
+<h3 id="185-コールバックからfutureとコルーチンへ">18.5 コールバックからFutureとコルーチンへ</h3>
+<p>コールバック地獄と解決方法</p>
+<h4 id="1851-1回のダウンロードにつき複数回のリクエスト">18.5.1 1回のダウンロードにつき複数回のリクエスト</h4>
+<h3 id="186-asyncioサーバを書く">18.6 asyncioサーバを書く</h3>
+<h4 id="1861-asycio-tcpサーバ">18.6.1 asycio TCPサーバ</h4>
+<h4 id="1862-aiohttpウェブサーバ">18.6.2 aiohttpウェブサーバ</h4>
+<h4 id="1863-並行性を高める賢いクライアント">18.6.3 並行性を高める賢いクライアント</h4>
+<h3 id="187-本章のまとめ">18.7 本章のまとめ</h3>
+<h3 id="188-参考文献">18.8 参考文献</h3>
+<h3 id="soapbox-5">Soapbox</h3>
+<p>とは、いいながら、色々とasyncなライブラリが作られていて、どれを使うのかを試されている。</p>
 <h2 id="19章-動的属性とプロパティ">19章 動的属性とプロパティ</h2>
 <h2 id="20章-属性ディスクリプタ">20章 属性ディスクリプタ</h2>
 <h2 id="21章-クラスメタプログラミング">21章 クラスメタプログラミング</h2>
@@ -1973,7 +2047,20 @@ pythonを書く上で役立つし、自分でどういう時に、コンテキ�
         <li><a href="#soapbox-4">Soapbox</a></li>
       </ul>
     </li>
-    <li><a href="#18章-asyncioによる並行処理">18章 asyncioによる並行処理</a></li>
+    <li><a href="#18章-asyncioによる並行処理">18章 asyncioによる並行処理</a>
+      <ul>
+        <li><a href="#181-スレッドとコルーチン">18.1 スレッドとコルーチン</a></li>
+        <li><a href="#asyncioおよびaiohttpによるダウンロード">asyncioおよびaiohttpによるダウンロード</a></li>
+        <li><a href="#183-ブロッキング型の呼び出しをぐるぐるまわす">18.3 ブロッキング型の呼び出しをぐるぐるまわす</a></li>
+        <li><a href="#184-asyncio-ダウンローダスクリプトの拡張">18.4 asyncio ダウンローダスクリプトの拡張</a></li>
+        <li><a href="#exeecutor-を使ったイベントループのブロッキングの回避方法">Exeecutor を使ったイベントループのブロッキングの回避方法</a></li>
+        <li><a href="#185-コールバックからfutureとコルーチンへ">18.5 コールバックからFutureとコルーチンへ</a></li>
+        <li><a href="#186-asyncioサーバを書く">18.6 asyncioサーバを書く</a></li>
+        <li><a href="#187-本章のまとめ">18.7 本章のまとめ</a></li>
+        <li><a href="#188-参考文献">18.8 参考文献</a></li>
+        <li><a href="#soapbox-5">Soapbox</a></li>
+      </ul>
+    </li>
     <li><a href="#19章-動的属性とプロパティ">19章 動的属性とプロパティ</a></li>
     <li><a href="#20章-属性ディスクリプタ">20章 属性ディスクリプタ</a></li>
     <li><a href="#21章-クラスメタプログラミング">21章 クラスメタプログラミング</a></li>

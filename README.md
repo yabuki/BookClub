@@ -35,3 +35,9 @@
 ## Daily work
 
 - 他のマシンで、作業してpublishしているとconflict起きやすいから、まずは、git pullする習慣があるといいよ。
+
+## 参考文献
+
+- [hugo-primer/exampleSite/content/blog at master · qqhann/hugo-primer](https://github.com/qqhann/hugo-primer/tree/master/exampleSite/content/blog)
+    - ルビ,youtube、数式
+

@@ -41,3 +41,9 @@
 - [hugo-primer/exampleSite/content/blog at master · qqhann/hugo-primer](https://github.com/qqhann/hugo-primer/tree/master/exampleSite/content/blog)
     - ルビ,youtube、数式
 
+- [GFM(GitHub Flavored Markdown) · GitBook](https://sugarnaoming.github.io/markdown_manual/chapter4.html#gfmgithub-flavored-markdown)
+    - table
+    - syntax highlight
+    - automated link
+    - 打ち消し線
+    - checkbox

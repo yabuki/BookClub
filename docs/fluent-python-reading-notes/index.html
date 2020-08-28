@@ -109,9 +109,9 @@
 
     
     <div class="float-md-right">
-      <span title="Lastmod: 2020-08-26. Published at: 2020-07-10.">
+      <span title="Lastmod: 2020-08-29. Published at: 2020-07-10.">
         
-          Lastmod: 2020-08-26
+          Lastmod: 2020-08-29
         
       </span>
     </div>
@@ -692,7 +692,16 @@ nonlocalで解決できる問題</li>
 <h3 id="77-シンプルなデコレータの実装">7.7 シンプルなデコレータの実装</h3>
 <h4 id="771-コードの解説">7.7.1 コードの解説</h4>
 <p>__name__ と __doc__ を覆い隠さないバージョン で、なんでこうなるかについても説明している。</p>
-<p>functoolsのなかにある functools.wraps は、<a href="https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.wraps">functools &mdash; 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント</a> であり、functools.update_wraps <a href="https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.update_wrapper">functools &mdash; 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント</a> を呼んでいるので、こっちも見る必要がある。</p>
+<p>functoolsのなかにある functools.wraps は、<a href="https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.wraps">functools.wraps: functools &mdash; 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント</a> であり、functools.update_wraps <a href="https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.update_wrapper">functools.update_wrapper: functools &mdash; 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント</a> を呼んでいるので、こっちも見る必要がある。</p>
+<ul>
+<li>実はここにある、functools.wrapsデコレータを実行しないと、名前の不一致で、doctestが動かない。p209
+<ul>
+<li>see also <a href="https://qiita.com/moonwalkerpoday/items/9bd987667a860adf80a2">Pythonのデコレータにはwrapsをつけるべきという覚え書き - Qiita</a></li>
+<li>キーワード引数を動かす時に必要です。</li>
+<li>__name__ と __doc__ が、思っている通りになっていないのを正す。p209</li>
+</ul>
+</li>
+</ul>
 <h3 id="78-標準ライブラリのデコレータ">7.8 標準ライブラリのデコレータ</h3>
 <p>property, classmethod, staticmethodの説明は後にするとのこと。functools.wraps は、既に紹介した。lru_cacheとsingledispatchの説明をするとのこと。</p>
 <h4 id="781-functoolslru_cache-を用いたメモ化">7.8.1 functools.lru_cache を用いたメモ化</h4>
@@ -2076,10 +2085,16 @@ p627</p>
 <h3 id="メタクラスの基礎">メタクラスの基礎</h3>
 <h4 id="2141-メタクラスの評価タイミング">21.4.1 メタクラスの評価タイミング</h4>
 <h3 id="215-ディスクリプタをカスタマイズするメタクラス">21.5 ディスクリプタをカスタマイズするメタクラス</h3>
+<ul>
+<li><a href="https://www.yunabe.jp/docs/python_metaclass.html">Python の メタプログラミング (<strong>metaclass</strong>, メタクラス) を理解する | yunabe.jp</a></li>
+</ul>
 <h3 id="216-メタクラスの特殊メソッド-__prepare__">21.6 メタクラスの特殊メソッド __prepare__</h3>
 <h3 id="217-オブジェクトとしてのクラス">21.7 オブジェクトとしてのクラス</h3>
 <h3 id="218-本章のまとめ">21.8 本章のまとめ</h3>
 <h3 id="219-参考文献">21.9 参考文献</h3>
+<ul>
+<li><a href="https://www.python.org/dev/peps/pep-0487/">PEP 487 &ndash; Simpler customisation of class creation | Python.org</a></li>
+</ul>
 <h3 id="soapbox-8">Soapbox</h3>
 <h2 id="あとがき">あとがき</h2>
 <h2 id="仮置場">仮置場</h2>

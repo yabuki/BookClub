@@ -799,7 +799,12 @@ p194にある。
 
 \_\_name\_\_ と \_\_doc\_\_ を覆い隠さないバージョン で、なんでこうなるかについても説明している。
 
-functoolsのなかにある functools.wraps は、[functools --- 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.wraps) であり、functools.update\_wraps [functools --- 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.update_wrapper) を呼んでいるので、こっちも見る必要がある。
+functoolsのなかにある functools.wraps は、[functools.wraps: functools --- 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.wraps) であり、functools.update\_wraps [functools.update\_wrapper: functools --- 高階関数と呼び出し可能オブジェクトの操作 — Python 3.8.5 ドキュメント](https://docs.python.org/ja/3/library/functools.html?highlight=functools%20wraps#functools.update_wrapper) を呼んでいるので、こっちも見る必要がある。
+
+- 実はここにある、functools.wrapsデコレータを実行しないと、名前の不一致で、doctestが動かない。p209
+    - see also [Pythonのデコレータにはwrapsをつけるべきという覚え書き - Qiita](https://qiita.com/moonwalkerpoday/items/9bd987667a860adf80a2)
+    - キーワード引数を動かす時に必要です。
+    - \_\_name\_\_ と \_\_doc\_\_ が、思っている通りになっていないのを正す。p209
 
 ### 7.8 標準ライブラリのデコレータ
 
@@ -2295,6 +2300,8 @@ snippetを使って書くべき所を動的にコードを書く。
 
 ### 21.5 ディスクリプタをカスタマイズするメタクラス ###
 
+- [Python の メタプログラミング (__metaclass__, メタクラス) を理解する | yunabe.jp](https://www.yunabe.jp/docs/python_metaclass.html)
+
 ### 21.6 メタクラスの特殊メソッド \_\_prepare\_\_ ###
 
 ### 21.7 オブジェクトとしてのクラス ###
@@ -2302,6 +2309,8 @@ snippetを使って書くべき所を動的にコードを書く。
 ### 21.8 本章のまとめ ###
 
 ### 21.9 参考文献 ###
+
+- [PEP 487 -- Simpler customisation of class creation | Python.org](https://www.python.org/dev/peps/pep-0487/)
 
 ### Soapbox ###
 

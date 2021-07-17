@@ -51,3 +51,7 @@
 - 文章校正/Redpen
     - [RedPen のおすすめ設定 - Qiita](https://qiita.com/takahi-i/items/f16fd93e2e5061851320)
     - [RedPen 1.10 ドキュメント](https://redpen.cc/docs/latest/index_ja.html)
+
+## GitHub Actions
+
+- [peaceiris/actions-gh-pages: GitHub Actions for GitHub Pages 🚀 Deploy static files and publish your site easily. Static-Site-Generators-friendly.](https://github.com/peaceiris/actions-gh-pages)

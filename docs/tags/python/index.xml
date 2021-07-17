@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on 矢吹の読書会記録</title>
+    <link>http://yabuki.github.io/BookClub/tags/python/</link>
+    <description>Recent content in Python on 矢吹の読書会記録</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>&amp;copy;YABUKI Yukiharu 2020</copyright>
+    <lastBuildDate>Fri, 10 Jul 2020 07:27:29 +0900</lastBuildDate>
+    
+	<atom:link href="http://yabuki.github.io/BookClub/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fluent Python 読書メモ</title>
+      <link>http://yabuki.github.io/BookClub/fluent-python-reading-notes/</link>
+      <pubDate>Fri, 10 Jul 2020 07:27:29 +0900</pubDate>
+      
+      <guid>http://yabuki.github.io/BookClub/fluent-python-reading-notes/</guid>
+      <description>はじめに Fluent Pythonを読むにあたって、「本を読む本」のなかで問われている問いに答える形で、読書メモを作っていこうと思う。 「初級読書」 &amp;mdash; これ</description>
+    </item>
+    
+    <item>
+      <title>FluentPython読書会</title>
+      <link>http://yabuki.github.io/BookClub/fluentpython/</link>
+      <pubDate>Sun, 05 Jul 2020 05:04:05 +0900</pubDate>
+      
+      <guid>http://yabuki.github.io/BookClub/fluentpython/</guid>
+      <description>はじめに せっかく買った Fluent Python1 を読みきっ ていない。これはあかん。ってことで、いろんな方の協力を得てオンライン読書会をすることにしました。 参加者の</description>
+    </item>
+    
+    <item>
+      <title>FluentPython読書会のスケジュール</title>
+      <link>http://yabuki.github.io/BookClub/fluentpython-schdule/</link>
+      <pubDate>Sun, 05 Jul 2020 05:04:05 +0900</pubDate>
+      
+      <guid>http://yabuki.github.io/BookClub/fluentpython-schdule/</guid>
+      <description>目次 https://www.oreilly.co.jp/books/9784873118178/#toc 下記は日本語版を対象とする。 章 章名 範囲 開催予定日 Note 1 Pythonのデータモデル 3p-17p 2020-07-13 2 シーケンスの配列 21p-67p 2020-07-15 3 ディクショナリとセット 69p-102p 2020-07-17 4</description>
+    </item>
+    
+  </channel>
+</rss>

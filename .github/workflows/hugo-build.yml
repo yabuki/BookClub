@@ -11,7 +11,7 @@ jobs:
     steps:
       # submodule を使っているので git clone --recursive をつける
       - name: Checkout Repository
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           ref: master
           submodules: 'true'
